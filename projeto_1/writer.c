@@ -17,6 +17,16 @@ main(int argc, char **argv) {
 
     llopen(fd, TRANSMITTER);
 
+    unsigned char *controlMessage;
+    if ( (controlMessage = createCommand(SET, TRANSMITTER)) == NULL ) {
+        char *error = "Failed to create a controlMessage"; 
+        fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); exit(1); 
+    }
+    if (sendCommandMessage(fd, controlMessage) < 0) {
+        char *error = "sendCommandMessage()"; 
+        fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); exit(1); 
+    }
+
     llclose(fd);
     return 0;
 }
