@@ -3,3 +3,4 @@ desktop.ini
 
 # ignore all vim sessions
 *.vim
+*.vscode
