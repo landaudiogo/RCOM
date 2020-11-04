@@ -56,7 +56,7 @@ llopen(int fd, int role);
 // 1. remove the lock from the file descriptor
 // 2. reset the old termios controls on the serial port driver
 int 
-llclose(int fd);
+llclose(int fd, int role);
 
 // 1. reading a command message
 // 2. reading an information message
@@ -75,8 +75,8 @@ llread(int fd, unsigned char **message);
 int 
 sendCommandMessage(int fd, unsigned char *ctrl_message);
 
-unsigned char
-*receiveCommadnMessage(int fd);
+int
+receiveCommandMessage(int fd, unsigned char command);
 
 int
 in_set(unsigned char value, unsigned char *set, int size);
