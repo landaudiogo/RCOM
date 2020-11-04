@@ -60,8 +60,8 @@ llclose(int fd);
 
 // 1. reading a command message
 // 2. reading an information message
-char
-*llread(int fd, int *sizemessage);
+int
+llread(int fd, unsigned char **message);
 
 
 
@@ -75,13 +75,12 @@ char
 int 
 sendCommandMessage(int fd, unsigned char *ctrl_message);
 
-unsigned char 
-*createCommand(unsigned char command, int role);
-
 unsigned char
 *receiveCommadnMessage(int fd);
+
+int
+in_set(unsigned char value, unsigned char *set, int size);
 // sendData(int fd)
 
-//bitStuffing()
 
 #endif

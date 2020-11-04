@@ -17,9 +17,8 @@ main(int argc, char **argv) {
 
     llopen(fd, RECEIVER);
 
-    char *ctrl_message;
-    int ctrl_message_size;
-    ctrl_message = llread(fd, &ctrl_message_size);
+    unsigned char *ctrl_message;
+    int ctrl_message_size = llread(fd, &ctrl_message);
 
     llclose(fd);
     return 0;
