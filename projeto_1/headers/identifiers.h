@@ -17,6 +17,9 @@
 // control bytes for UNNUMBERED and SUPERVISION frames
 #define IC0  0x00
 #define IC1  0x02
+// stuffing
+#define ESCAPE    0x7d
+#define XOR_BYTE  0x20
 
 #define TRANSMITTER 240
 #define RECEIVER    241

@@ -17,6 +17,7 @@ alarm_handler() {
 void 
 initialize_alarm() {
     signal(SIGALRM, alarm_handler);
+    FLAG_ALARM = 0;
     retry = 0;
 }
 
@@ -57,21 +58,17 @@ llopen(int fd, int role) {
     // setting connection between tx and rx
     if (role == TRANSMITTER) {
         initialize_alarm();
-        int attempt=0, success = 0;
         while(retry <= MAX_RETRY) {
-            if(attempt == retry) {
-                FLAG_ALARM = 0;
-                alarm(TIMEOUT); // start the timer
-                unsigned char command[] = {FLAG, A1, SET, A1^SET, FLAG};
-                if (sendCommandMessage(fd, command) == -1) return -1; // send SET
-                if (receiveCommandMessage(fd, UA) == 0) {
-                    success = 1;
-                    break; // successfully receive UA
-                }
-                attempt++;
-            } 
+            FLAG_ALARM = 0;
+            alarm(TIMEOUT); // start the timer
+            unsigned char command[] = {FLAG, A1, SET, A1^SET, FLAG};
+            if (sendCommandMessage(fd, command) == -1) return -1; // send SET
+            if (receiveCommandMessage(fd, UA) == 0) {
+                alarm(0);
+                return 0;
+            }
         }
-        return success ? 0 : -1;
+        return -1;
     }
     else {
         if (receiveCommandMessage(fd, SET) == -1) return -1;

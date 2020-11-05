@@ -28,4 +28,13 @@ receiveCommandMessage(int fd, unsigned char command);
 int
 in_set(unsigned char value, unsigned char *set, int size);
 
+unsigned char 
+*readFile(char *file_path, int *file_size);
+
+unsigned char
+*stuff(unsigned char *original, int og_size, int *stuffed_size);
+
+unsigned char
+*de_stuff(unsigned char *stuffed, int stuffed_size, int *og_size);
+
 #endif
