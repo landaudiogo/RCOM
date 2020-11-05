@@ -1,7 +1,10 @@
 all: writer reader
 
-writer: writer.c shared.c 
-	gcc -o writer writer.c shared.c
+writer: src/writer.c shared.o
+	gcc -o exec/writer src/writer.c shared.o funcs.o
 
-reader: reader.c shared.c
-	gcc -o reader reader.c shared.c
+reader: src/reader.c shared.o
+	gcc -o exec/reader src/reader.c shared.o funcs.o
+
+shared.o: src/shared.c src/funcs.c
+	gcc -c src/shared.c src/funcs.c

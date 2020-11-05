@@ -1,0 +1,31 @@
+#ifndef FUNCS_H
+#define FUNCS_H
+
+// colored messages
+#define RESET "\033[0m" 
+#define RED   "\033[31m"
+#define GREEN "\033[32m"
+
+#define BAUD B38400
+
+#include "state.h"
+#include "identifiers.h"
+
+// shared variable
+extern int FLAG_ALARM;
+
+/**********************************
+***********************************
+        INTERNAL FUNCTIONS 
+***********************************
+**********************************/
+int 
+sendCommandMessage(int fd, unsigned char *ctrl_message);
+
+int
+receiveCommandMessage(int fd, unsigned char command);
+
+int
+in_set(unsigned char value, unsigned char *set, int size);
+
+#endif
