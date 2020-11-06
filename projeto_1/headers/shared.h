@@ -20,7 +20,6 @@
 
 #include "funcs.h"
 
-extern int fd;
 
 
 
@@ -29,6 +28,8 @@ extern int fd;
            API FUNCTIONS
 ***********************************
 **********************************/
+void 
+initialize_alarm();
 
 // 1. Lock the file
 // 2. Modify the termios control to well defined parameters

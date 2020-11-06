@@ -7,7 +7,6 @@
 #define R_RCVSET  2
 #define R_STOP    3
 
-
 #include "shared.h"
 // 1. reading a command message
 // 2. reading an information message
