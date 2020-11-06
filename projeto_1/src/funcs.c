@@ -135,7 +135,15 @@ unsigned char
 }
 
 
+unsigned char
+*build_command_header(unsigned char C, int role) {
+    unsigned char *header = (unsigned char *) calloc(4, sizeof(unsigned char));
 
+    header[0] = FLAG;
+    header[1] = (role == TRANSMITTER) ? A1 : A0;
+    header[2] = C;
+    header[3] = header[1]^header[2];
+}
 
 
 

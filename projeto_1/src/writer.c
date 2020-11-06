@@ -15,7 +15,7 @@ main(int argc, char **argv) {
     }
 
 
-    // set the connection
+    // 1) set the connection
     if ( (fd = open(argv[1], O_RDWR | O_NOCTTY)) == -1) {
         perror(argv[1]); exit(1); }
 
@@ -27,21 +27,22 @@ main(int argc, char **argv) {
     printf("LLOPEN: [" GREEN "OK" RESET "]\n\n\n");
 
 
-    // send the file
+    // 2) sending the file
+    // 2.1) get the file information 
     char *file_name, *tok;
     int og_size;
     unsigned char *og_data = readFile(argv[2], &og_size);
+
     tok = strtok(argv[2], "/");
     while (tok != NULL) { file_name = tok; tok = strtok(NULL, "/"); } // determine file_name
     printf("%s: %d\n", file_name, og_size);
-
+    
+    // 2.2) stuff the data to be sent
     int stuffed_size;
     unsigned char *stuffed = stuff(og_data, og_size, &stuffed_size);
-    printf("og: %d -----> st: %d\n", og_size, stuffed_size);
 
-    int original_size;
-    unsigned char *original = de_stuff(stuffed, stuffed_size, &original_size);
-    printf("st: %d -----> og: %d\n", stuffed_size, original_size);
+    // 2.3) send the data
+
 
 
 

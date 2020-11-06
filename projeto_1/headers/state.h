@@ -1,7 +1,7 @@
 #ifndef STATE_H
 #define STATE
 
-// state machine 
+// BYTE state machine 
 #define START    0
 #define FLAG_RCV 1
 #define A_RCV    2

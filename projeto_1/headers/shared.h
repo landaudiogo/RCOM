@@ -20,7 +20,7 @@
 
 #include "funcs.h"
 
-
+extern int fd;
 
 
 
@@ -40,13 +40,5 @@ llopen(int fd, int role);
 // 2. reset the old termios controls on the serial port driver
 int 
 llclose(int fd, int role);
-
-// 1. reading a command message
-// 2. reading an information message
-int
-llread(int fd, unsigned char **message);
-
-
-
 
 #endif

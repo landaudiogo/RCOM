@@ -116,14 +116,3 @@ llclose(int fd, int role) {
 }
 
 
-int 
-llread(int fd, unsigned char **message) {
-    message = (unsigned char **)calloc(1, sizeof(unsigned char *));
-    *message = (unsigned char *)calloc(0, sizeof(unsigned char));
-    char c;
-    int bytes_read = 0, state = 0;
-
-    return bytes_read;
-} 
-
-

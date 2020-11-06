@@ -8,6 +8,8 @@
 
 #define BAUD B38400
 
+#define PCK_SIZE 10000
+
 #include "state.h"
 #include "identifiers.h"
 
