@@ -4,3 +4,4 @@ a.out
 
 # ignore all vim sessions
 *.vim
+*.vscode
