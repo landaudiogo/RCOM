@@ -42,66 +42,37 @@ main(int argc, char **argv) {
 
 int 
 llread(int fd, unsigned char **message) {
-    unsigned char c;
-    int stuffed_size = MAX_PACKET_SIZE, message_size = 0;
-    unsigned char *stuffed = calloc(stuffed_size,1);
+    int stuffed_size = 0;
+    unsigned char *stuffed = calloc(0,1);
     unsigned char expected_seq = IC0;
     int idx = 0;
 
     while(1) {
-        int state = START;
-        int ignore_flag = 0;
-        unsigned char header[4];
-        while (state != STOP) {
-            if (read(fd, &c, 1) <= 0)  {
-                continue;
-            }
-            switch (state) {
-                case START:
-                    state = (c == FLAG) ? FLAG_RCV : 0;
-                    header[0] = (c == FLAG) ? c : 0;
-                    break;
-                case FLAG_RCV:;
-                    unsigned char set[] = {A0, A1};
-                    state = FLAG_RCV*(c == FLAG)
-                          + A_RCV*(in_set(c, set, 2));
-                    header[1] = (in_set(c, set, 2)) ? c : 0;
-                    break;
-                case A_RCV:;
-                    unsigned char set1[] = {SET, DISC, UA, RR0, RR1, REJ0, REJ1, IC0, IC1};
-                    state = FLAG_RCV*(c == FLAG)
-                          + C_RCV*(in_set(c, set1, 9));  // any other control message
-                    header[2] = (in_set(c, set1, 9)) ? c : 0;
-                    break;
-                case C_RCV: // BCC CHECK
-                    state = FLAG_RCV*(c == FLAG)
-                          + BCC_OK*((header[1]^header[2]) == c);
-                    break;
-                case BCC_OK: // receive information
-                    if (expected_seq != header[2]) break; // if 
-                    if (idx >= stuffed_size) {
-                        stuffed = realloc(stuffed, (stuffed_size + MAX_PACKET_SIZE));
-                        stuffed_size += MAX_PACKET_SIZE;
-                    }
-                    stuffed[idx++] = c;
-                    state = STOP*(c == FLAG)
-                          + BCC_OK*(c != FLAG);
-                    break;
-            }
-        }
-        stuffed_size = idx;
-        stuffed = realloc(stuffed, stuffed_size);
-        unsigned char BCC = 0x0;
-        for (int i = 0; i< stuffed_size-2; i++) BCC ^= stuffed[i];
-        if(BCC == stuffed[stuffed_size-2]) {
-            message_size += stuffed_size-2; // info bytes - 1 header - 1 BCC
-            *message = realloc(*message, stuffed, stuffed_size-2);
+        int message_size;
+        unsigned char *message;
+        unsigned char ctrl = receiveFrame(fd, &message, &message_size);
+
+        if (ctrl == expected_seq) { // is the information frame we expected
+            stuffed = realloc(stuffed, stuffed_size+message_size);
+            memcpy(stuffed+idx, message, message_size);
             expected_seq ^= (IC0^IC1);
-        } else {
-            if (BCC)
-            unsigned char reply[] = {FLAG, A1, REJ}
-            write(fd, )
+            idx+=message_size;
+
+            unsigned char RR = (ctrl == IC0) ? RR1: RR0;
+            unsigned char command[] ={FLAG, A1, RR, A1^RR, FLAG};
+            write(fd, command, 5);
         }
+        else if (ctrl == expected_seq^(IC0^IC1)) { // is the duplicate information frame
+            unsigned char REJ = (ctrl == IC0) ? REJ1 : REJ0;
+            unsigned char command1[] ={FLAG, A1, REJ, A1^REJ, FLAG};
+            write(fd, command1, 5);
+        }
+        else { // is any other command frame (in reading mode we should not be receiving a command frame other than information)
+            char *error = "undefined behaviour... ignoring"; 
+            fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
+        }
+        free(message);
     }
+    return 0;
 }
 

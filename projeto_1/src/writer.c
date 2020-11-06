@@ -104,7 +104,7 @@ llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
             printf("\n");
             unsigned char ack = (i%2 == 1) ? RR0 : RR1;
             unsigned char neg_ack = (i%2 == 0) ? REJ0 : REJ1;
-            unsigned char command = receiveCommandMessage(fd);
+            unsigned char command = receiveFrame(fd);
             if (command == neg_ack) {
                 last_byte_sent += num_bytes_to_send;
                 break;

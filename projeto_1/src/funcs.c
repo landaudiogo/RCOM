@@ -13,13 +13,13 @@
 int FLAG_ALARM;
 
 unsigned char
-receiveCommandMessage(int fd, unsigned char **message, int message_size) {
+receiveFrame(int fd, unsigned char **message, int *message_size, unsigned char expected_seq) {
     unsigned char c;
     int state = 0;
     unsigned char header[3];
 
-    unsigned char *aux;
-    int size_aux;
+    unsigned char *aux=calloc(0, 1);
+    int size_aux, idx=0;
     
     unsigned char address = 0, ctrl = 0;
     while (state != STOP && FLAG_ALARM != 1) {
@@ -46,13 +46,25 @@ receiveCommandMessage(int fd, unsigned char **message, int message_size) {
                 state = FLAG_RCV*(c == FLAG)
                       + BCC_OK*((header[0]^header[1]) == c);
                 break;
-            case BCC_OK:
-                state = STOP*(c == FLAG)
-                      + BCC_OK*(c != FLAG);
+            case BCC_OK:;
+                unsigned char *set2 = {IC0, IC1}
+                if (in_set(header[1], set2, 2)) { // if the frame received is an information frame
+                    state = STOP*(c == FLAG)
+                          + BCC_OK*(c != FLAG);
+                    aux = realloc(aux, ++idx);
+                    aux[idx-1] = c;
+                } 
+                else { // is another control message (not IC0, IC1)
+                    state = START*(c != FLAG)
+                          + STOP*(c == FLAG);
+                    free(aux); aux = NULL;
+                }
                 break;
         }
     }
-    return ctrl;
+    *message = aux;
+    *message_size = idx;
+    return header[1];
 }
 
 
@@ -122,6 +134,7 @@ unsigned char
         idx_og++;
     }
 
+    original = realloc(original, *og_size);
     return original;
 }
 
