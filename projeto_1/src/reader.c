@@ -48,23 +48,35 @@ llread(int fd, unsigned char **message) {
     int idx = 0;
 
     while(1) {
-        int message_size;
-        unsigned char *message;
+        int message_size=0;
+        unsigned char *message=NULL;
         unsigned char ctrl = receiveFrame(fd, &message, &message_size);
 
         if (ctrl == expected_seq) { // is the information frame we expected
-            stuffed = realloc(stuffed, stuffed_size+message_size);
-            memcpy(stuffed+idx, message, message_size);
-            expected_seq ^= (IC0^IC1);
-            idx+=message_size;
+            printf("expected seq\n");
+            if (BCC2_check(message, message_size) == 0) { // BCC2_check returned OK
+                message_size -= 2; // remove header and BCC2_check
+                stuffed = realloc(stuffed, stuffed_size+message_size);
+                stuffed_size += message_size;
+                memcpy(stuffed+idx, message, message_size);
 
-            unsigned char RR = (ctrl == IC0) ? RR1: RR0;
-            unsigned char command[] ={FLAG, A1, RR, A1^RR, FLAG};
-            write(fd, command, 5);
+                expected_seq ^= (IC0^IC1);
+                idx+=message_size;
+                
+                print_array(stuffed, stuffed_size);
+                unsigned char RR = (ctrl == IC0) ? RR1 : RR0;
+                unsigned char command1[] ={FLAG, A1, RR, A1^RR, FLAG};
+                write(fd, command1, 5);
+            }
+            else { // BCC_check FAILED
+                unsigned char REJ = (ctrl == IC0) ? REJ0 : REJ1;
+                unsigned char command1[] ={FLAG, A1, REJ, A1^REJ, FLAG};
+                write(fd, command1, 5);
+            }
         }
         else if (ctrl == expected_seq^(IC0^IC1)) { // is the duplicate information frame
-            unsigned char REJ = (ctrl == IC0) ? REJ1 : REJ0;
-            unsigned char command1[] ={FLAG, A1, REJ, A1^REJ, FLAG};
+            unsigned char RR = (ctrl == IC0) ? RR1 : RR0;
+            unsigned char command1[] ={FLAG, A1, RR, A1^RR, FLAG};
             write(fd, command1, 5);
         }
         else { // is any other command frame (in reading mode we should not be receiving a command frame other than information)

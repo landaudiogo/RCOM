@@ -68,7 +68,7 @@ llopen(int fd, int role) {
             unsigned char command[] = {FLAG, A1, SET, A1^SET, FLAG};
             if (write(fd, command, 5) == -1) return -1; // send SET
             alarm(TIMEOUT); // start the timer
-            if (receiveFrame(fd, &dummy_message, &dummy_message) == UA) {
+            if (receiveFrame(fd, &dummy_message, &dummy_size) == UA) {
                 alarm(0);
                 return 0;
             }
@@ -76,7 +76,7 @@ llopen(int fd, int role) {
         return -1;
     }
     else {
-        if (receiveFrame(fd, &dummy_message, &dummy_message) != SET) return -1;
+        if (receiveFrame(fd, &dummy_message, &dummy_size) != SET) return -1;
         unsigned char command[] = {FLAG, A0, UA, A0^UA, FLAG};
         if (write(fd, command, 5) == -1) return -1;
     }
@@ -101,7 +101,7 @@ llclose(int fd, int role) {
             FLAG_ALARM = 0;
             if (write(fd, command, 5) == -1) return -1;
             alarm(TIMEOUT);
-            if (receiveFrame(fd, &dummy_message, &dummy_message) == DISC) {
+            if (receiveFrame(fd, &dummy_message, &dummy_size) == DISC) {
                 unsigned char command1[] = {FLAG, A1, UA, A1^UA, FLAG};
                 if (write(fd, command1, 5) == -1) return -1;
 
@@ -112,7 +112,7 @@ llclose(int fd, int role) {
         return -1;
     } 
     else {
-        if (receiveFrame(fd, &dummy_message, &dummy_message) != DISC) return -1;
+        if (receiveFrame(fd, &dummy_message, &dummy_size) != DISC) return -1;
         unsigned char command[] = {FLAG, A0, DISC, A0^DISC, FLAG};
         initialize_alarm();
         
@@ -120,7 +120,7 @@ llclose(int fd, int role) {
             FLAG_ALARM = 0;
             if (write(fd, command, 5) == -1) return -1;
             alarm(TIMEOUT);
-            if (receiveFrame(fd, &dummy_message, &dummy_message) == UA) {
+            if (receiveFrame(fd, &dummy_message, &dummy_size) == UA) {
                 alarm(0);
                 return 0;
             }

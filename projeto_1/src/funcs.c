@@ -13,10 +13,10 @@
 int FLAG_ALARM;
 
 unsigned char
-receiveFrame(int fd, unsigned char **message, int *message_size, unsigned char expected_seq) {
+receiveFrame(int fd, unsigned char **message, int *message_size) {
     unsigned char c;
     int state = 0;
-    unsigned char header[3];
+    unsigned char header[2] = {0,0};
 
     unsigned char *aux=calloc(0, 1);
     int size_aux, idx=0;
@@ -47,7 +47,7 @@ receiveFrame(int fd, unsigned char **message, int *message_size, unsigned char e
                       + BCC_OK*((header[0]^header[1]) == c);
                 break;
             case BCC_OK:;
-                unsigned char *set2 = {IC0, IC1}
+                unsigned char set2[] = {IC0, IC1};
                 if (in_set(header[1], set2, 2)) { // if the frame received is an information frame
                     state = STOP*(c == FLAG)
                           + BCC_OK*(c != FLAG);
@@ -62,9 +62,24 @@ receiveFrame(int fd, unsigned char **message, int *message_size, unsigned char e
                 break;
         }
     }
+
     *message = aux;
     *message_size = idx;
     return header[1];
+}
+
+
+int
+BCC2_check(unsigned char *data, int size) {
+    unsigned char res=0x0;
+    if (size <= 2) {
+        return -1;
+    }
+    for (int i=0; i<size-2; i++) {
+        res^=data[i];
+    }
+    if (res == data[size-2]) return 0;
+    return -1;
 }
 
 

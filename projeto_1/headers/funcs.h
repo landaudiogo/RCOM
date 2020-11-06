@@ -32,6 +32,9 @@ extern int retry;
 unsigned char
 receiveFrame(int fd, unsigned char **message, int *message_size);
 
+int
+BCC2_check(unsigned char *data, int size);
+
 // returns 1 if value in set[] else 0 if not
 int
 in_set(unsigned char value, unsigned char *set, int size);

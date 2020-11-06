@@ -6,6 +6,9 @@
 int retry;
 int role = TRANSMITTER;
 
+unsigned char *dummy_message;
+int dummy_size;
+
 
 int 
 main(int argc, char **argv) {
@@ -71,12 +74,11 @@ llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
 
     printf("num_packets: %d\n", num_packets);
 
-
     for (int i=0; i<num_packets; i++) {
+        initialize_alarm();
+
         int num_bytes_to_send = ((stuffed_size - last_byte_sent) > MAX_PACKET_SIZE) ? MAX_PACKET_SIZE : (stuffed_size - last_byte_sent);
         printf("to send: %d\tlast_byte_sent: %d\n", num_bytes_to_send, last_byte_sent);
-
-        initialize_alarm();
 
         // building frame
         unsigned char *bytes_to_send = slice(stuffed, last_byte_sent, last_byte_sent + num_bytes_to_send);
@@ -85,13 +87,14 @@ llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
         unsigned char *header = build_command_header(C, role);
         int header_size = 4;
 
+        // BUILD FRAME
         int frame_size = header_size + num_bytes_to_send+2; // header + info + BCC + flag
         unsigned char *frame = calloc(frame_size,1);
         memcpy(frame, header, header_size);
         memcpy(frame+4, bytes_to_send, num_bytes_to_send);
         free(bytes_to_send); free(header);
         unsigned char BCC = 0x0;
-        for (i=4; i<frame_size-2; i++) BCC ^= frame[i];
+        for (int j=4; j<frame_size-2; j++) BCC ^= frame[j];
         frame[frame_size-2] = BCC;
         frame[frame_size-1] = FLAG;
         
@@ -100,21 +103,21 @@ llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
             FLAG_ALARM = 0;
             alarm(TIMEOUT); // start the timer
             write(fd, frame, frame_size);
-            print_array(frame, frame_size);
-            printf("\n");
             unsigned char ack = (i%2 == 1) ? RR0 : RR1;
-            unsigned char neg_ack = (i%2 == 0) ? REJ0 : REJ1;
-            unsigned char command = receiveFrame(fd);
-            if (command == neg_ack) {
+            unsigned char nack = (i%2 == 0) ? REJ0 : REJ1; // received when the data is corrupted
+            unsigned char command = receiveFrame(fd, &dummy_message, &dummy_size);
+            if (command == nack) { // repeat transmission
+                alarm(0);
+                printf("received nack\n");
+            }
+            else if (command == ack) { // move on to next transmission
+                alarm(0);
+                printf("received ack\n");
                 last_byte_sent += num_bytes_to_send;
                 break;
             }
-            else if (command == ack) { // repeat transmission
-                alarm(0);
-                continue;
-            }
+            else if (retry == MAX_RETRY) return -1;
         }
-        return -1;
     }
     
 
