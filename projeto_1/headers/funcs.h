@@ -23,9 +23,17 @@ extern int retry;
 ***********************************
 **********************************/
 
-// returns the command byte
+// INPUT
+//  fd: file descriptor from where we are supposed to read the information;
+//  **message: if the frame received is an information frame, then the data field is stored in *message;
+//  *message_size: if the frame received is an information frame, the size of the data field is stored in this variable;
+// RETURN
+//  Command byte 
 unsigned char
-receiveCommandMessage(int fd);
+receiveFrame(int fd, unsigned char **message, int *message_size);
+
+int
+BCC2_check(unsigned char *data, int size);
 
 // returns 1 if value in set[] else 0 if not
 int
