@@ -133,7 +133,7 @@ unsigned char
 
 unsigned char
 *de_stuff(unsigned char *stuffed, int stuffed_size, int *og_size) {
-    unsigned char *original = calloc(stuffed_size, stuffed_size*sizeof(unsigned char));
+    unsigned char *original = calloc(stuffed_size, stuffed_size);
     *og_size = stuffed_size;
     int idx_og=0, idx_st=0, times=0;
 

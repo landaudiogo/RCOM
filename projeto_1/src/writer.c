@@ -35,20 +35,18 @@ main(int argc, char **argv) {
     // 2) sending the file
     // 2.1) get the file information 
     char *file_name, *tok;
-    int og_size;
-    unsigned char *og_data = readFile(argv[2], &og_size);
+    int original_size;
+    unsigned char *original = readFile(argv[2], &original_size);
 
     tok = strtok(argv[2], "/");
     while (tok != NULL) { file_name = tok; tok = strtok(NULL, "/"); } // determine file_name
     
     // 2.2) stuff the data to be sent
-    int stuffed_size;
-    unsigned char *stuffed = stuff(og_data, og_size, &stuffed_size);
-    printf("%s: %d\n", file_name, og_size);
-    print_array(stuffed, stuffed_size);
+    printf("%s: %d\n", file_name, original_size);
+    print_array(original, original_size);
 
     // 2.3) send the data
-    if (llwrite(fd, stuffed, stuffed_size) ) {
+    if (llwrite(fd, original, original_size) ) {
         char *error = "Failed to write"; 
         fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
     }
@@ -68,8 +66,8 @@ main(int argc, char **argv) {
 
 
 int 
-llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
-    int num_packets = (stuffed_size % MAX_PACKET_SIZE) ?  (int)stuffed_size/MAX_PACKET_SIZE+1 : (int)stuffed_size/MAX_PACKET_SIZE;
+llwrite(int fd, unsigned char *buffer, int buffer_size) {
+    int num_packets = (buffer_size % MAX_PACKET_SIZE) ?  (int)buffer_size/MAX_PACKET_SIZE+1 : (int)buffer_size/MAX_PACKET_SIZE;
     int last_byte_sent = 0;
 
     printf("num_packets: %d\n", num_packets);
@@ -77,27 +75,32 @@ llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
     for (int i=0; i<num_packets; i++) {
         initialize_alarm();
 
-        int num_bytes_to_send = ((stuffed_size - last_byte_sent) > MAX_PACKET_SIZE) ? MAX_PACKET_SIZE : (stuffed_size - last_byte_sent);
-        printf("to send: %d\tlast_byte_sent: %d\n", num_bytes_to_send, last_byte_sent);
-
-        // building frame
-        unsigned char *bytes_to_send = slice(stuffed, last_byte_sent, last_byte_sent + num_bytes_to_send);
-        unsigned char C = (i%2 == 0) ? IC0 : IC1;
-
-        unsigned char *header = build_command_header(C, role);
-        int header_size = 4;
+        int num_bytes_to_send = ((buffer_size - last_byte_sent) > MAX_PACKET_SIZE) ? MAX_PACKET_SIZE : (buffer_size - last_byte_sent);
+        // printf("to send: %d\tlast_byte_sent: %d\n", num_bytes_to_send, last_byte_sent);
 
         // BUILD FRAME
-        int frame_size = header_size + num_bytes_to_send+2; // header + info + BCC + flag
-        unsigned char *frame = calloc(frame_size,1);
-        memcpy(frame, header, header_size);
-        memcpy(frame+4, bytes_to_send, num_bytes_to_send);
-        free(bytes_to_send); free(header);
+        // -header
+        unsigned char C = (i%2 == 0) ? IC0 : IC1;
+        unsigned char *header = build_command_header(C, role);
+        int header_size = 4;
+        // -data field
+        int data_field_size = num_bytes_to_send;
+        unsigned char *data_field = slice(buffer, last_byte_sent, last_byte_sent + data_field_size);
+        //print_array(data_field, data_field_size);
+        // --creating BCC & stuffing
         unsigned char BCC = 0x0;
-        for (int j=4; j<frame_size-2; j++) BCC ^= frame[j];
+        for (int j=0; j<data_field_size; j++) BCC ^= data_field[j];
+        int frame_size = data_field_size+2;
+        unsigned char *frame;
+        frame = realloc(data_field, frame_size);
         frame[frame_size-2] = BCC;
-        frame[frame_size-1] = FLAG;
-        
+        unsigned char *aux = frame; // to free original frame data
+        frame = stuff(frame, frame_size-1, &frame_size); frame_size++; free(aux); // stuff the datafield with the BCC
+        frame[frame_size-1] = FLAG; // terminate the data field
+        aux = frame; frame = realloc(header, frame_size += 4);
+        memcpy(frame+4, aux, frame_size-4); // after this operation frame now has header, stuffed data and flag
+
+        //print_array(frame, frame_size);
 
         while (retry < MAX_RETRY) {
             FLAG_ALARM = 0;
@@ -108,21 +111,21 @@ llwrite(int fd, unsigned char *stuffed, int stuffed_size) {
             unsigned char command = receiveFrame(fd, &dummy_message, &dummy_size);
             if (command == nack) { // repeat transmission
                 alarm(0);
-                printf("received nack\n");
+                //print_array(frame, frame_size);
+                //printf("received nack\n");
+                break;
             }
             else if (command == ack) { // move on to next transmission
                 alarm(0);
-                printf("received ack\n");
+                //printf("received ack\n");
                 last_byte_sent += num_bytes_to_send;
                 break;
             }
             else if (retry == MAX_RETRY) return -1;
         }
     }
-    
-
-
-
+    printf("finished data transmission\n");
+    return 0;
 }
 
 
