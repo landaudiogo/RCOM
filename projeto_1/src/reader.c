@@ -1,7 +1,13 @@
 #include "../headers/reader.h"
+#include "../headers/linklayer.h"
+
 #include <string.h>
 
 int role = RECEIVER; 
+
+// definition of external variables
+linkLayer linkRole;
+int fd;
 
 int 
 main(int argc, char **argv) {
@@ -11,12 +17,22 @@ main(int argc, char **argv) {
         exit(1);
     }
 
-    int fd; // file descriptor for the serial port
     if ( (fd = open(argv[1], O_RDWR | O_NOCTTY)) == -1) {
         perror(argv[1]); exit(1); }
 
+    linkLayer connectionParams;
+    if (strlen(argv[1]) < 50)
+        strcpy(connectionParams.serialPort, argv[1]);
+    connectionParams.role = RECEIVER;
+    connectionParams.baudRate = BAUD;
+    connectionParams.numTries = MAX_RETRY;
+    connectionParams.timeOut = TIMEOUT;
+
+    if ( (fd = open(connectionParams.serialPort, O_RDWR | O_NOCTTY)) == -1) {
+        perror(argv[1]); exit(1); }
+
     // set a connection
-    if (llopen(fd, role) == -1) {
+    if (llopen(connectionParams) == -1) {
         char *error = "Failed to establish connection"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         exit(1);
@@ -24,11 +40,11 @@ main(int argc, char **argv) {
     printf("LLOPEN: \t[" GREEN "OK" RESET "]\n\n\n");
 
     // receive the file
-    unsigned char *message; 
-    llread(fd, &message);
+    char *message; 
+    llread(message);
 
     // close the connection
-    if (llclose(fd, role) == -1) {
+    if (llclose(TRUE) == -1) {
         char *error = "Failed to close connection"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         exit(1); 
@@ -38,7 +54,7 @@ main(int argc, char **argv) {
 }
 
 int 
-llread(int fd, unsigned char **buffer) {
+llread(char *packet) {
     int original_size = 0;
     unsigned char *original = NULL;
     unsigned char expected_seq = IC0;

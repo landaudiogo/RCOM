@@ -14,8 +14,4 @@
 #include "funcs.h"
 #include "shared.h"
 
-
-int 
-llwrite(int fd, unsigned char *stuffed, int stuffed_size);
-
 #endif

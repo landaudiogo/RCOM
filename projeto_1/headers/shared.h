@@ -7,7 +7,6 @@
 #include "identifiers.h"
 #include "state.h"
 
-
 // include functions
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,20 +22,12 @@
 #include "funcs.h"
 #include "state.h"
 #include "identifiers.h"
+#include "linklayer.h"
 
+extern linkLayer linkRole; 
+extern int fd;
 
-/**********************************
-***********************************
-           API FUNCTIONS
-***********************************
-**********************************/
 void 
 initialize_alarm();
-
-int 
-llopen(int fd, int role);
-
-int 
-llclose(int fd, int role);
 
 #endif

@@ -1,4 +1,5 @@
 #include "../headers/writer.h"
+#include "../headers/linklayer.h"
 
 #include <signal.h>
 #include <string.h>
@@ -9,6 +10,9 @@ int role = TRANSMITTER;
 unsigned char *dummy_message;
 int dummy_size;
 
+// definition of external variable to be carried to other functions
+linkLayer linkRole;
+int fd;
 
 int 
 main(int argc, char **argv) {
@@ -17,12 +21,19 @@ main(int argc, char **argv) {
         exit(1);
     }
 
-    int fd;
-    if ( (fd = open(argv[1], O_RDWR | O_NOCTTY)) == -1) {
+    linkLayer connectionParams;
+    if (strlen(argv[1]) < 50)
+        strcpy(connectionParams.serialPort, argv[1]);
+    connectionParams.role = TRANSMITTER;
+    connectionParams.baudRate = BAUD;
+    connectionParams.numTries = MAX_RETRY;
+    connectionParams.timeOut = TIMEOUT;
+
+    if ( (fd = open(connectionParams.serialPort, O_RDWR | O_NOCTTY)) == -1) {
         perror(argv[1]); exit(1); }
     
     // 1) set the connection
-    if (llopen(fd, role) == -1) {
+    if (llopen(connectionParams) == -1) {
         char *error = "Failed to establish connection"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         exit(1); 
@@ -41,14 +52,14 @@ main(int argc, char **argv) {
     printf("%s: %d\n", file_name, original_size);
 
     // 2.2) send the data
-    if (llwrite(fd, original, original_size) ) {
+    if (llwrite(original, original_size) ) {
         char *error = "Failed to write"; 
         fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
     }
     free(original); original = NULL;
     
     // close the connection 
-    if (llclose(fd, role) == -1) {
+    if (llclose(TRUE) == -1) {
         char *error = "Failed to close connection"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         return -1;
@@ -59,7 +70,7 @@ main(int argc, char **argv) {
 
 
 int 
-llwrite(int fd, unsigned char *buffer, int buffer_size) {
+llwrite(char *buffer, int buffer_size) {
     int num_packets = (buffer_size % MAX_PACKET_SIZE) ?  (int)buffer_size/MAX_PACKET_SIZE+1 : (int)buffer_size/MAX_PACKET_SIZE;
     int last_byte_sent = 0;
 

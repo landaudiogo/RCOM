@@ -21,9 +21,6 @@
 #define ESCAPE    0x7d
 #define XOR_BYTE  0x20
 
-#define TRANSMITTER 240
-#define RECEIVER    241
-
 #define MAX_RETRY   3 
 #define TIMEOUT     3 // 3 seconds 
 

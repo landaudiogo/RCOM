@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 
 #include "../headers/funcs.h"
+#include "../headers/linklayer.h"
 
 int FLAG_ALARM;
 
@@ -25,6 +26,7 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
         if (read(fd, &c, 1) <= 0)  {
             continue;
         }
+        // printf("state: %d\tc: %x\n", state, c);
         switch (state) {
             // state: condition
             //   FLAG_RCV: FLAG 

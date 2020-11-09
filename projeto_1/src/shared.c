@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-struct termios newtio, oldtio;
+struct termios oldtio, newtio;
 int retry;
 int FLAG_ALARM=0;
 
@@ -27,8 +27,8 @@ initialize_alarm() {
 }
 
 int
-llopen(int fd, int role) { 
-    if (role != TRANSMITTER && role != RECEIVER) {
+llopen(linkLayer connectionParameters) { 
+    if (connectionParameters.role != TRANSMITTER && connectionParameters.role != RECEIVER) {
         char *error = "role belongs to {TRANSMITTER, RECEIVER}"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); return -1; 
     }
@@ -60,7 +60,7 @@ llopen(int fd, int role) {
     }
 
     // setting connection between tx and rx
-    if (role == TRANSMITTER) {
+    if (connectionParameters.role == TRANSMITTER) {
         initialize_alarm(); 
         while(retry <= MAX_RETRY) {
             FLAG_ALARM = 0;
@@ -68,33 +68,37 @@ llopen(int fd, int role) {
             if (write(fd, command, 5) == -1) return -1; // send SET
             alarm(TIMEOUT); 
             if (receiveFrame(fd, &dummy_message, &dummy_size) == UA) { // receive UA
+                printf("---1---\n");
                 alarm(0);
                 free(dummy_message); dummy_message = NULL; 
+                linkRole = connectionParameters;
                 return 0;
             }
             free(dummy_message); dummy_message = NULL; 
         }
         return -1;
     }
-    else if (role == RECEIVER) {
+    else if (connectionParameters.role == RECEIVER) {
         if (receiveFrame(fd, &dummy_message, &dummy_size) != SET) return -1; // receive SET
         free(dummy_message); dummy_message = NULL; 
         unsigned char command[] = {FLAG, A0, UA, A0^UA, FLAG};
         if (write(fd, command, 5) == -1) return -1; // send UA
+        linkRole = connectionParameters;
+        return 0;
     }
+    return -1;
 
-    return 0;
 }
 
 int 
-llclose(int fd, int role) {
-    if (role != TRANSMITTER && role != RECEIVER) {
+llclose(int showStatistics) {
+    if (linkRole.role != TRANSMITTER && linkRole.role != RECEIVER) {
         char *error = "role belongs to {TRANSMITTER, RECEIVER}"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         return -1; 
     }
 
-    if (role == TRANSMITTER) {
+    if (linkRole.role == TRANSMITTER) {
         unsigned char command[] = {FLAG, A1, DISC, A1^DISC, FLAG};
 
         initialize_alarm();
@@ -113,7 +117,7 @@ llclose(int fd, int role) {
         }
         return -1;
     } 
-    else if (role == RECEIVER) {
+    else if (linkRole.role == RECEIVER) {
         if (receiveFrame(fd, &dummy_message, &dummy_size) != DISC) return -1; // receive DISC
         free(dummy_message); dummy_message = NULL; 
         unsigned char command[] = {FLAG, A0, DISC, A0^DISC, FLAG};

@@ -15,7 +15,4 @@
 #include "funcs.h"
 #include "shared.h"
 
-int
-llread(int fd, unsigned char **message);
-
 #endif
