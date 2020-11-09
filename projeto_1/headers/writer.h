@@ -6,7 +6,14 @@
 #define W_SNDI    1
 #define W_STOP    2
 
+// internal functions
+// shared functions
+// static definitions
+#include "state.h"
+#include "identifiers.h"
+#include "funcs.h"
 #include "shared.h"
+
 
 int 
 llwrite(int fd, unsigned char *stuffed, int stuffed_size);

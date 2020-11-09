@@ -7,9 +7,14 @@
 #define R_RCVSET  2
 #define R_STOP    3
 
+// internal functions
+// shared functions
+// static definitions
+#include "state.h"
+#include "identifiers.h"
+#include "funcs.h"
 #include "shared.h"
-// 1. reading a command message
-// 2. reading an information message
+
 int
 llread(int fd, unsigned char **message);
 

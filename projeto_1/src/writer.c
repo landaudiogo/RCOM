@@ -12,18 +12,16 @@ int dummy_size;
 
 int 
 main(int argc, char **argv) {
-    int fd;
-    struct termios oldtio;
-
     if (argc<=2 || strncmp(argv[1], "/dev/pts/", 9) != 0) {
         printf("Expecting 2 arguments:\n1) serial port (/dev/pts/N)\n2) file path to be transfered (../penguin.gif)\n");
         exit(1);
     }
 
-    // 1) set the connection
+    int fd;
     if ( (fd = open(argv[1], O_RDWR | O_NOCTTY)) == -1) {
         perror(argv[1]); exit(1); }
-
+    
+    // 1) set the connection
     if (llopen(fd, role) == -1) {
         char *error = "Failed to establish connection"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
@@ -39,21 +37,16 @@ main(int argc, char **argv) {
     unsigned char *original = readFile(argv[2], &original_size);
 
     tok = strtok(argv[2], "/");
-    while (tok != NULL) { file_name = tok; tok = strtok(NULL, "/"); } // determine file_name
-    
-    // 2.2) stuff the data to be sent
+    while (tok != NULL) { file_name = tok; tok = strtok(NULL, "/"); } // filename stored in file_name
     printf("%s: %d\n", file_name, original_size);
-    print_array(original, original_size);
 
-    // 2.3) send the data
+    // 2.2) send the data
     if (llwrite(fd, original, original_size) ) {
         char *error = "Failed to write"; 
         fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
     }
-
-
-
-
+    free(original); original = NULL;
+    
     // close the connection 
     if (llclose(fd, role) == -1) {
         char *error = "Failed to close connection"; 
@@ -76,53 +69,51 @@ llwrite(int fd, unsigned char *buffer, int buffer_size) {
         initialize_alarm();
 
         int num_bytes_to_send = ((buffer_size - last_byte_sent) > MAX_PACKET_SIZE) ? MAX_PACKET_SIZE : (buffer_size - last_byte_sent);
-        // printf("to send: %d\tlast_byte_sent: %d\n", num_bytes_to_send, last_byte_sent);
-
         // BUILD FRAME
         // -header
         unsigned char C = (i%2 == 0) ? IC0 : IC1;
-        unsigned char *header = build_command_header(C, role);
         int header_size = 4;
+        unsigned char *header = build_command_header(C, role);
         // -data field
         int data_field_size = num_bytes_to_send;
         unsigned char *data_field = slice(buffer, last_byte_sent, last_byte_sent + data_field_size);
-        //print_array(data_field, data_field_size);
         // --creating BCC & stuffing
         unsigned char BCC = 0x0;
         for (int j=0; j<data_field_size; j++) BCC ^= data_field[j];
-        int frame_size = data_field_size+2;
-        unsigned char *frame;
-        frame = realloc(data_field, frame_size);
-        frame[frame_size-2] = BCC;
-        unsigned char *aux = frame; // to free original frame data
-        frame = stuff(frame, frame_size-1, &frame_size); frame_size++; free(aux); // stuff the datafield with the BCC
+        int data_BCC_size = data_field_size+1;
+        unsigned char *data_BCC;
+        data_BCC = realloc(data_field, data_BCC_size);
+        data_BCC[data_BCC_size-1] = BCC;
+        // stuffing
+        int data_stuffed_size;
+        unsigned char *data_stuffed;
+        data_stuffed = stuff(data_BCC, data_BCC_size, &data_stuffed_size); free(data_BCC);
+        // header + stuffed + FLAG
+        int frame_size = 4+data_stuffed_size+1;
+        unsigned char *frame = header;
+        frame = realloc(frame, frame_size); 
+        memcpy(frame+4, data_stuffed, data_stuffed_size); free(data_stuffed);
         frame[frame_size-1] = FLAG; // terminate the data field
-        aux = frame; frame = realloc(header, frame_size += 4);
-        memcpy(frame+4, aux, frame_size-4); // after this operation frame now has header, stuffed data and flag
-
-        //print_array(frame, frame_size);
 
         while (retry < MAX_RETRY) {
             FLAG_ALARM = 0;
             alarm(TIMEOUT); // start the timer
-            write(fd, frame, frame_size);
+            write(fd, frame, frame_size); // send the frame
             unsigned char ack = (i%2 == 1) ? RR0 : RR1;
             unsigned char nack = (i%2 == 0) ? REJ0 : REJ1; // received when the data is corrupted
             unsigned char command = receiveFrame(fd, &dummy_message, &dummy_size);
+            free(dummy_message);
             if (command == nack) { // repeat transmission
                 alarm(0);
-                //print_array(frame, frame_size);
-                //printf("received nack\n");
-                break;
+                printf(" === received nack ===\n");
             }
             else if (command == ack) { // move on to next transmission
                 alarm(0);
-                //printf("received ack\n");
                 last_byte_sent += num_bytes_to_send;
                 break;
             }
-            else if (retry == MAX_RETRY) return -1;
         }
+        free(frame);
     }
     printf("finished data transmission\n");
     return 0;
