@@ -13,13 +13,10 @@
 int FLAG_ALARM;
 
 unsigned char
-receiveCommandMessage(int fd, unsigned char **message, int message_size) {
+receiveCommandMessage(int fd, int message_size) {
     unsigned char c;
     int state = 0;
-    unsigned char header[3];
-
-    unsigned char *aux;
-    int size_aux;
+    unsigned char header[2];
     
     unsigned char address = 0, ctrl = 0;
     while (state != STOP && FLAG_ALARM != 1) {
@@ -30,13 +27,13 @@ receiveCommandMessage(int fd, unsigned char **message, int message_size) {
             case START:
                 state = FLAG_RCV*(c == FLAG);
                 break;
-            case FLAG_RCV:;
+            case FLAG_RCV:
                 unsigned char set[] = {A0, A1};
                 state = FLAG_RCV*(c == FLAG)
                       + A_RCV*(in_set(c, set, 2));
                 header[0] = in_set(c, set, 2)*c;
                 break;
-            case A_RCV:;
+            case A_RCV:
                 unsigned char set1[] = {SET, DISC, UA, RR0, RR1, REJ0, REJ1, IC0, IC1};
                 state = FLAG_RCV*(c == FLAG)
                       + C_RCV*(in_set(c, set1, 9));
@@ -127,7 +124,7 @@ unsigned char
 
 
 unsigned char
-*build_command_header(unsigned char C, int role) {
+*build_command_header(unsigned char C, int role) { //isto deve originar memory leaks, porque nao dar um endereco como argumento?
     unsigned char *header = calloc(4, sizeof(unsigned char));
     header[0] = FLAG;
     header[1] = (role == TRANSMITTER) ? A1 : A0;
@@ -138,7 +135,7 @@ unsigned char
 
 
 unsigned char 
-*slice(unsigned char *data, int st, int end) {
+*slice(unsigned char *data, int st, int end) { //o mesmo do anterior    
     unsigned char *res = calloc(end-st, sizeof(unsigned char));
     for (int i=0; i<end-st; i++) {
         res[i] = data[st+i];
