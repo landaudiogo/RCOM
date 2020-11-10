@@ -74,7 +74,7 @@ unsigned char
     stat(file_path, &st); *file_size = st.st_size; // get file size
     file_data = calloc(*file_size, sizeof(unsigned char));
     fread(file_data, 1, *file_size, f);
-
+    fclose(f);
     return file_data;
 }
 
@@ -125,7 +125,7 @@ unsigned char
 
 unsigned char
 *build_command_header(unsigned char C, int role) { //isto deve originar memory leaks, porque nao dar um endereco como argumento?
-    unsigned char *header = calloc(4, sizeof(unsigned char));
+    unsigned char *header = calloc(4, sizeof(unsigned char));//e reciclar sempre esse endereço em vez de alocar memoria para cada header
     header[0] = FLAG;
     header[1] = (role == TRANSMITTER) ? A1 : A0;
     header[2] = C;
