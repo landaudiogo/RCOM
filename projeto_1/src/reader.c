@@ -5,7 +5,7 @@ int role = RECEIVER;
 
 int 
 main(int argc, char **argv) {
-    if (argc<=1 || strncmp(argv[1], "/dev/pts/", 9) != 0 || strncmp(argv[1], "dev/tty", 7) != 0) {
+    if (argc<=1 || strncmp(argv[1], "/dev/pts/", 9) != 0 || strncmp(argv[1], "/dev/tty", 7) != 0) {
         char *error = "Arguments expected to be of type:\n1) /dev/pts/N (where N represents a postive Integer)\n2) relative or absolute file_path to the file\n"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError -> %s\n\n" RESET, __FILE__, __func__, error); 
         exit(1);
