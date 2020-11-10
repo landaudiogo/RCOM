@@ -97,8 +97,9 @@ llwrite(int fd, unsigned char *buffer, int buffer_size) {
 
         while (retry < MAX_RETRY) {
             FLAG_ALARM = 0;
-            alarm(TIMEOUT); // start the timer
             write(fd, frame, frame_size); // send the frame
+            alarm(TIMEOUT); // start the timer
+            
             unsigned char ack = (i%2 == 1) ? RR0 : RR1;
             unsigned char nack = (i%2 == 0) ? REJ0 : REJ1; // received when the data is corrupted
             unsigned char command = receiveFrame(fd, &dummy_message, &dummy_size);
