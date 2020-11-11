@@ -16,7 +16,7 @@ int fd;
 
 int 
 main(int argc, char **argv) {
-    if (argc<=2 || strncmp(argv[1], "/dev/pts/", 9) != 0) {
+    if (argc<=2 || (strncmp(argv[1], "/dev/pts/", 9) != 0 && strncmp(argv[1], "/dev/ttyS", 9) != 0) ) {
         printf("Expecting 2 arguments:\n1) serial port (/dev/pts/N)\n2) file path to be transfered (../penguin.gif)\n");
         exit(1);
     }
@@ -55,6 +55,7 @@ main(int argc, char **argv) {
     if (llwrite(original, original_size) ) {
         char *error = "Failed to write"; 
         fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
+        return -1;
     }
     free(original); original = NULL;
     
@@ -126,7 +127,9 @@ llwrite(char *buffer, int buffer_size) {
         }
         free(frame);
         if (retry == MAX_RETRY) {
-            llopen(linkRole);
+            char *error = "role belongs to {TRANSMITTER, RECEIVER}"; 
+            fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); return NULL; 
+            if (llopen(linkRole) != 0) break;
             i=-1;
         }
     }

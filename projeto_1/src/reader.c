@@ -56,7 +56,7 @@ main(int argc, char **argv) {
 int 
 llread(char *packet) {
     int original_size = 0;
-    unsigned char *original = NULL;
+    unsigned char *original = calloc(0,1);
     unsigned char expected_seq = IC0;
     int idx = 0;
 
@@ -102,7 +102,9 @@ llread(char *packet) {
             unsigned char command1[] ={FLAG, A0, UA, A0^UA, FLAG};
             write(fd, command1, 5); // send UA
             original_size = 0;
-            free(original); original = NULL;
+            free(original); original = calloc(0,1);
+            expected_seq = IC0;
+            idx = 0;
         }
         else { // is any other command frame (in reading mode we should not be receiving a command frame other than information)
             char *error = "undefined behaviour... ignoring"; 

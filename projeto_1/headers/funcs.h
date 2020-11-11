@@ -6,7 +6,6 @@
 #define RED   "\033[31m"
 #define GREEN "\033[32m"
 
-#define BAUD B38400
 #define MAX_PACKET_SIZE 20
 
 #include "state.h"
