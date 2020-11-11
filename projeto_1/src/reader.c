@@ -101,6 +101,8 @@ llread(char *packet) {
             fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
             unsigned char command1[] ={FLAG, A0, UA, A0^UA, FLAG};
             write(fd, command1, 5); // send UA
+            original_size = 0;
+            free(original); original = NULL;
         }
         else { // is any other command frame (in reading mode we should not be receiving a command frame other than information)
             char *error = "undefined behaviour... ignoring"; 
@@ -114,6 +116,7 @@ llread(char *packet) {
     FILE *f = fopen("testpenguin.gif", "wb");
     fwrite(original, 1, original_size, f);
     free(original);
+    fclose(f);
     return 0;
 }
 

@@ -125,6 +125,10 @@ llwrite(char *buffer, int buffer_size) {
             }
         }
         free(frame);
+        if (retry == MAX_RETRY) {
+            llopen(linkRole);
+            i=-1;
+        }
     }
     printf("finished data transmission\n");
     return 0;
