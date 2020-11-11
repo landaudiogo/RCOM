@@ -52,7 +52,7 @@ main(int argc, char **argv) {
     printf("%s: %d\n", file_name, original_size);
 
     // 2.2) send the data
-    if (llwrite(original, original_size) ) {
+    if (llwrite(original, original_size) != 0) {
         char *error = "Failed to write"; 
         fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
         return -1;
@@ -127,9 +127,10 @@ llwrite(char *buffer, int buffer_size) {
         }
         free(frame);
         if (retry == MAX_RETRY) {
-            char *error = "role belongs to {TRANSMITTER, RECEIVER}"; 
-            fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); return NULL; 
-            if (llopen(linkRole) != 0) break;
+            char *error = "Attempting to restart connection"; 
+            fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
+            if (llopen(linkRole) != 0) return -1;
+            last_byte_sent = 0;
             i=-1;
         }
     }

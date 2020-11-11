@@ -11,7 +11,7 @@ int fd;
 
 int 
 main(int argc, char **argv) {
-    if (argc<=1 || strncmp(argv[1], "/dev/pts/", 9) != 0) {
+    if (argc<=1 || (strncmp(argv[1], "/dev/pts/", 9) != 0 && strncmp(argv[1], "/dev/ttyS", 9) != 0)) {
         char *error = "Arguments expected to be of type:\n1) /dev/pts/N (where N represents a postive Integer)\n2) relative or absolute file_path to the file\n"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError -> %s\n\n" RESET, __FILE__, __func__, error); 
         exit(1);
@@ -86,7 +86,6 @@ llread(char *packet) {
                 unsigned char REJ = (ctrl == IC0) ? REJ0 : REJ1;
                 unsigned char command1[] ={FLAG, A1, REJ, A1^REJ, FLAG};
                 write(fd, command1, 5);
-                break; 
             }
         }
         else if (ctrl == (expected_seq^(IC0^IC1)) ) { // is the duplicate information frame
