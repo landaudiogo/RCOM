@@ -68,7 +68,6 @@ llopen(linkLayer connectionParameters) {
             if (write(fd, command, 5) == -1) return -1; // send SET
             alarm(TIMEOUT); 
             if (receiveFrame(fd, &dummy_message, &dummy_size) == UA) { // receive UA
-                printf("---1---\n");
                 alarm(0);
                 free(dummy_message); dummy_message = NULL; 
                 linkRole = connectionParameters;

@@ -129,7 +129,10 @@ llwrite(char *buffer, int buffer_size) {
         if (retry == MAX_RETRY) {
             char *error = "Attempting to restart connection"; 
             fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
-            if (llopen(linkRole) != 0) return -1;
+            if (llopen(linkRole) != 0) {
+                free(buffer); buffer = NULL; 
+                return -1;
+            }
             last_byte_sent = 0;
             i=-1;
         }
