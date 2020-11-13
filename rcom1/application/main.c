@@ -87,12 +87,11 @@ int main(int argc, char *argv[]) {
 		llclose(1);
         close(file_desc);
         return 0;
-			
 	}
 	else
 	{
-        	// ***************
-        	// rx mode
+        // ***************
+        // rx mode
 		printf("rx mode\n");
 
         struct linkLayer ll;
