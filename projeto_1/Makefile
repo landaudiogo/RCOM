@@ -1,13 +1,7 @@
 SHELL=/bin/bash
 
 
-all: writer reader
+all: objects
 
-writer: src/writer.c lib
-	gcc src/writer.c -o exec/writer  shared.o funcs.o
-
-reader: src/reader.c lib
-	gcc src/reader.c -o exec/reader shared.o funcs.o
-
-lib: src/shared.c src/funcs.c
-	gcc -c src/{shared.c,funcs.c}
+objects: src/shared.c src/funcs.c
+	gcc -c src/*.c
