@@ -93,17 +93,15 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
 
 
 int
-BCC2_check(unsigned char *data, int size) {
-    unsigned char res=0x0;
-    if (size <= 2) { // cannot perform BCC considering the last 2 bytes belong to the FLAG and BCC
+BCC2_check(unsigned char *data, int size, unsigned char BCC) {
+    if (size <= 0) { // cannot perform BCC considering the last 2 bytes belong to the FLAG and BCC
         char *error = "Not enough bytes received to perform BCC2_check"; 
         fprintf(stderr, RED "\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         return -1;
     }
-    for (int i=0; i < size-2; i++) {
-        res^=data[i];
-    }
-    return (res == data[size-2]) ? 0 : -1;
+    unsigned char res=0x0;
+    for (int i=0; i < size; i++) res^=data[i];
+    return (res == BCC) ? TRUE : FALSE;
 }
 
 
@@ -156,16 +154,19 @@ unsigned char
 }
 
 
-unsigned char
-*de_stuff(unsigned char *stuffed, int stuffed_size, int *og_size) {
-    unsigned char *original = calloc(stuffed_size, stuffed_size);
-    *og_size = stuffed_size;
+int
+de_stuff(unsigned char *stuffed, int stuffed_size, unsigned char *original, int *og_size, unsigned char *BCC) {
     int idx_og=0, idx_st=0, times=0;
+    int iter_stop = (stuffed[stuffed_size-3] == ESCAPE) ? stuffed_size-3 : stuffed_size-2; // where the BCC byte is in the stuffed frame
 
-    for (idx_st=0; idx_st < stuffed_size; idx_st++) {
-        if (stuffed[idx_st] == ESCAPE) { 
+    for (idx_st=0; idx_st < iter_stop; idx_st++) { // we will only iterate until the last byte
+        if (idx_og == MAX_PAYLOAD_SIZE) { // if we were to write to original in this case, we would be writing on invalid memory 
+            char *error = "Received a frame with more bytes than the allowed payload"; 
+            fprintf(stderr, RED "\n\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
+            return -1;
+        }
+        else if (stuffed[idx_st] == ESCAPE) { 
             original[idx_og] = stuffed[++idx_st]^XOR_BYTE; // second byte
-            (*og_size)--;
             times++;
         }
         else {
@@ -173,9 +174,9 @@ unsigned char
         }
         idx_og++;
     }
-
-    original = realloc(original, *og_size);
-    return original;
+    *og_size = idx_og;
+    *BCC = (stuffed[stuffed_size-3] == ESCAPE) ? XOR_BYTE^stuffed[stuffed_size-2] : stuffed[stuffed_size-2]; 
+    return 0;
 }
 
 

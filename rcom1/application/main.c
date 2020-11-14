@@ -81,7 +81,6 @@ int main(int argc, char *argv[]) {
                     printf("App layer: done reading and sending file\n");
                     break;
             }
-			sleep(1);
 		}
         // close connection
 		llclose(1);

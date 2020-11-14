@@ -2,6 +2,7 @@
 
 #include <unistd.h>
 #include <signal.h>
+#include <time.h>
 
 struct termios oldtio, newtio;
 int retry;
@@ -10,13 +11,18 @@ int FLAG_ALARM=0;
 // useful when calling receiveFrame for a control frame
 unsigned char *dummy_message; 
 int dummy_size; 
+int fd; 
 
+linkLayer linkRole;
+Statistics stats = {0,0,0,0};
 
 void 
 alarm_handler() {
-    printf(RED "Alarm triggered\n" RESET);
+    char *error = "ALARM"; 
+    fprintf(stderr, RED "== %s ==\n" RESET, error); 
     retry++;
     FLAG_ALARM = 1;
+    (stats.alarms)++;
 }
 
 void 
@@ -33,21 +39,22 @@ llopen(linkLayer connectionParameters) {
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); return -1; 
     }
     // store the information on the old settings to be reset at the end of transmission
+    if ( (fd = open(connectionParameters.serialPort, O_RDWR | O_NOCTTY)) == -1) return -1;
     if (tcgetattr(fd, &oldtio) == -1) {
         char *error = "tcgetattr()"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
         return -1; 
     }
-
     // new termios structure
     bzero(&newtio, sizeof(newtio));
-    newtio.c_cflag = BAUD | CS8 | CLOCAL | CREAD;
+    newtio.c_cflag = BAUDRATE_DEFAULT | CS8 | CLOCAL | CREAD;
     newtio.c_iflag = IGNPAR;
     newtio.c_oflag = 0;
     newtio.c_lflag = 0;
     // defining the control characters
     newtio.c_cc[VMIN] = 0; 
     newtio.c_cc[VTIME] = 1; // sets an overall timer for read so it doesn't block
+
     if (tcflush(fd, TCIOFLUSH) == -1) {
         char *error = "tcflush()"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
@@ -91,6 +98,17 @@ llopen(linkLayer connectionParameters) {
 
 int 
 llclose(int showStatistics) {
+    // printing statistics
+    if (showStatistics) {
+        fprintf(stdout, "\n\n===========================================\n===========================================\n");
+        fprintf(stdout, "[" GREEN "ACKS" RESET "]:  \t %d\n", stats.acks);
+        // fprintf(stdout, "[" GREEN "ELAPSED TIME" RESET "]: %f\n", secs);
+        if (linkRole.role == RECEIVER)
+            fprintf(stdout, "[" RED "REPEATED_ACKS" RESET "]: %d\n", stats.repeated_acks);
+        fprintf(stdout, "[" RED "NACKS" RESET "]:  \t %d\n", stats.nacks);
+        fprintf(stdout, "[" RED "ALARMS" RESET "]:  \t %d\n", stats.alarms);
+        fprintf(stdout, "===========================================\n===========================================\n\n");
+    }
     if (linkRole.role != TRANSMITTER && linkRole.role != RECEIVER) {
         char *error = "role belongs to {TRANSMITTER, RECEIVER}"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
@@ -99,7 +117,7 @@ llclose(int showStatistics) {
 
     if (linkRole.role == TRANSMITTER) {
         unsigned char command[] = {FLAG, A1, DISC, A1^DISC, FLAG};
-
+        
         initialize_alarm();
         while (retry < MAX_RETRY) { 
             FLAG_ALARM = 0;
