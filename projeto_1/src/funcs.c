@@ -19,7 +19,7 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
     int state = 0;
     unsigned char header[2] = {0,0}; 
 
-    unsigned char *aux=calloc(0, 1); // used to assign the datafield which will be passed on to *message
+    unsigned char *aux=calloc(MAX_PAYLOAD_SIZE*2+3, 1); // used to assign the datafield which will be passed on to *message
     int size_aux, idx=0; 
     
     while (state != STOP && FLAG_ALARM != 1) { // stop the cycle if alarm is raised or STOP state is reached
@@ -74,8 +74,10 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
                 if (in_set(header[1], set2, 2)) { // if the frame received is an information frame
                     state = STOP*(c == FLAG)
                           + BCC_OK*(c != FLAG);
-                    aux = realloc(aux, ++idx);
-                    aux[idx-1] = c;
+                    aux[idx++] = c;
+                    if (state == STOP) {
+                        aux = realloc(aux, idx);
+                    }
                 } 
                 else { // is another command message not in (IC0, IC1)
                     state = START*(c != FLAG)
@@ -85,7 +87,7 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
                 break;
         }
     }
-
+    
     *message = aux; 
     *message_size = idx;
     return header[1]; // command message received
@@ -126,6 +128,7 @@ unsigned char
     stat(file_path, &st); *file_size = st.st_size; // get file size
     file_data = calloc(*file_size, 1); 
     fread(file_data, 1, *file_size, f);
+
     fclose(f);
     return file_data;
 }
@@ -133,14 +136,13 @@ unsigned char
 
 unsigned char
 *stuff(unsigned char *original, int og_size, int *stuffed_size) {
-    unsigned char *stuffed = calloc(og_size, 1);
+    unsigned char *stuffed = calloc(og_size*2, 1);
     *stuffed_size = og_size;
     int idx_og=0, idx_st=0; // indices for the arrays (st -> stuffed, og -> original)
 
     for (idx_og=0; idx_og < og_size; idx_og++) {
         unsigned char set[]={FLAG, ESCAPE};
         if (in_set(original[idx_og], set, 2))  {  // if it belongs in {FLAG, ESCAPE}
-            stuffed = realloc(stuffed, (++(*stuffed_size)) );
             stuffed[idx_st] = ESCAPE;
             stuffed[++idx_st] = XOR_BYTE^original[idx_og];
         } else {
@@ -148,7 +150,8 @@ unsigned char
         }
         idx_st++;
     }
-
+    *stuffed_size = idx_st;
+    stuffed = realloc(stuffed, *stuffed_size);
     return stuffed;
 }
 
@@ -209,3 +212,6 @@ print_array(unsigned char *array, int size) {
     }
     printf("]\n");
 }
+
+
+
