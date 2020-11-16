@@ -52,7 +52,6 @@ llwrite(char *buffer, int buffer_size) {
             alarm(0);
             retry = 0;
             stats.nacks++;
-            notworking
             // printf(" === received nack ===\n");
         }
         else if (command == ack) { // move on to next transmission

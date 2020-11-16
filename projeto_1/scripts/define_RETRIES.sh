@@ -8,4 +8,3 @@ else
 fi
 
 sed -Ei "s/(^#define\s+MAX_RETRANSMISSIONS_DEFAULT\s+)(\w+)/\1$retries/1" ../headers/linklayer.h
-grep MAX_RETRANSMISSIONS_DEFAULT ../headers/linklayer.h | cat

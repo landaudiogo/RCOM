@@ -103,6 +103,12 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
                 if (in_set(header[1], set2, 2)) { // if the frame received is an information frame
                     state = STOP*(c == FLAG)
                           + BCC_OK*(c != FLAG);
+
+                    if (idx >= (MAX_PAYLOAD_SIZE*2+3)) {
+                        char *error = "Receiving more frames than allowed"; 
+                        fprintf(stderr, RED "\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
+                        return 0x0; 
+                    }
                     aux[idx++] = c;
                     if (state == STOP) {
                         aux = realloc(aux, idx);

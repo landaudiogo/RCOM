@@ -1,0 +1,223 @@
+/dev/ttyS11 rx tests/images/received_penguin_2.gif
+[31m
+
+Module: src/funcs.c
+Function: de_stuff()
+Error: Received a frame with more bytes than the allowed payload
+
+[0mrx mode
+--> position: 2	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 499
+--> position: 6	state: 4
+--> position: 1	state: 4
+--> position: 0	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 998
+--> position: 2	state: 4
+--> position: 2	state: 4
+--> position: 5	state: 4
+--> position: 6	state: 4
+===[31mNACK[0m===
+--> position: 1	state: 4
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+===[31mNACK[0m===
+--> position: 7	state: 4
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 5	state: 4
+--> position: 5	state: 4
+--> position: 6	state: 4
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+--> position: 4	state: 4
+--> position: 4	state: 4
+===[31mNACK[0m===
+--> position: 5	state: 1
+--> position: 1	state: 0
+--> position: 4	state: 0
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 1497
+--> position: 3	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 1996
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 2495
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 2994
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 3493
+--> position: 6	state: 4
+--> position: 2	state: 4
+===[31mNACK[0m===
+--> position: 6	state: 4
+--> position: 6	state: 4
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 3992
+--> position: 1	state: 4
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+--> position: 0	state: 4
+--> position: 4	state: 4
+===[31mNACK[0m===
+--> position: 1	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+--> position: 7	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 4491
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 4990
+--> position: 4	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+===[31mNACK[0m===
+--> position: 0	state: 4
+--> position: 4	state: 4
+--> position: 4	state: 4
+--> position: 6	state: 4
+--> position: 3	state: 4
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 5489
+--> position: 5	state: 4
+--> position: 2	state: 4
+===[31mNACK[0m===
+--> position: 1	state: 4
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+--> position: 2	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 5988
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 6487
+--> position: 6	state: 4
+--> position: 5	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+--> position: 7	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 6986
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 7485
+--> position: 3	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 7984
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 8483
+--> position: 2	state: 4
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 6	state: 4
+--> position: 4	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 4	state: 4
+--> position: 4	state: 4
+--> position: 5	state: 4
+--> position: 7	state: 4
+--> position: 6	state: 4
+--> position: 7	state: 4
+--> position: 7	state: 4
+--> position: 0	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+--> position: 3	state: 4
+--> position: 2	state: 4
+--> position: 5	state: 4
+===[31mNACK[0m===
+--> position: 1	state: 4
+--> position: 0	state: 4
+--> position: 1	state: 4
+--> position: 4	state: 4
+--> position: 7	state: 4
+--> position: 0	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 8982
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 0	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+--> position: 0	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 9481
+--> position: 6	state: 4
+===[31mNACK[0m===
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 7	state: 0
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 0	state: 4
+--> position: 4	state: 4
+===[31mNACK[0m===
+--> position: 4	state: 4
+--> position: 2	state: 4
+--> position: 7	state: 4
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 2	state: 4
+--> position: 7	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 9980
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 5	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 500 499 10479
+--> position: 7	state: 4
+--> position: 2	state: 4
+===[31mNACK[0m===
+--> position: 0	state: 4
+--> position: 3	state: 4
+--> position: 0	state: 4
+===[31mNACK[0m===
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 7	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+===[31mNACK[0m===
+--> position: 3	state: 4
+===[31mNACK[0m===
+===[32mACK[0m===
+read from file -> write to link layer, 490 489 10968
+===[32mACK[0m===
+App layer: done receiving file
+
+
+===========================================
+===========================================
+[[32mACKS[0m]:  	 23
+[[32mELAPSED TIME[0m]:  0.046342
+[[31mREPEATED_ACKS[0m]: 0
+[[31mNACKS[0m]:  	 49
+[[31mALARMS[0m]:  	 0
+===========================================
+===========================================
+

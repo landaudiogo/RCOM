@@ -8,4 +8,3 @@ else
 fi
 
 sed -Ei "s/(^#define\s+MAX_PAYLOAD_SIZE\s+)(\w+)/\1$payload/1" ../headers/linklayer.h
-grep MAX_PAYLOAD_SIZE ../headers/linklayer.h | cat

@@ -1,4 +1,17 @@
 #!/bin/bash
+
+# this script has exit status
+# 1: 
+#   if one of the input variables doesn't match the options
+#   if no OPTION has been given
+# 0: 
+#   in case of succes
+
+
+
+
+
+
 ((i = 0))
 for arg_content in "$@"; do
     p_error='^(-p_error)(.*)$'
@@ -34,6 +47,9 @@ for arg_content in "$@"; do
         retries_argument=3
         ((i++))
         break;
+    else 
+        printf "argument [ ${arg_content} ] does not belong to OPTIONS set. Use --help\n"
+        exit 1
     fi
 
 done
@@ -68,23 +84,23 @@ fi
 
 # defining P_ERROR
 if [[ ! -z $p_error_argument ]]; then 
-    ./define_P_ERROR.sh $p_error_argument
+    ./define_P_ERROR.sh $p_error_argument || exit 1
     printf "\n"
 fi
 if [[ ! -z $payload_argument ]]; then 
-    ./define_PAYLOAD.sh $payload_argument
+    ./define_PAYLOAD.sh $payload_argument || exit 1
     printf "\n"
 fi
 if [[ ! -z $baud_argument ]]; then 
-    ./define_BAUDRATE.sh $baud_argument
+    ./define_BAUDRATE.sh $baud_argument || exit 1
     printf "\n"
 fi
 if [[ ! -z $timeout_argument ]]; then 
-    ./define_TIMEOUT.sh $timeout_argument
+    ./define_TIMEOUT.sh $timeout_argument || exit 1
     printf "\n"
 fi
 if [[ ! -z $retries_argument ]]; then 
-    ./define_RETRIES.sh $retries_argument
+    ./define_RETRIES.sh $retries_argument || exit 1
     printf "\n"
 fi
 

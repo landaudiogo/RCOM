@@ -8,4 +8,3 @@ else
 fi
 
 sed -Ei "s/(^#define\s+BAUDRATE_DEFAULT\s+)(\w+)/\1B$baud/1" ../headers/linklayer.h
-grep BAUDRATE_DEFAULT ../headers/linklayer.h | cat

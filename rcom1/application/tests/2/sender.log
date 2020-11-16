@@ -1,7 +1,13 @@
 /dev/ttyS10 tx penguin.gif
-tx mode
+[31m== ALARM ==
+[0mtx mode
 ======== STARTING ========
 connection opened
+[31m== ALARM ==
+[0m[31m== ALARM ==
+[0m[31m== ALARM ==
+[0m[31m== ALARM ==
+[0mread from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
@@ -12,7 +18,7 @@ read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
-read from file -> write to link layer, 499
+--> position: 2	state: 2
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
@@ -30,9 +36,9 @@ App layer: done reading and sending file
 ===========================================
 ===========================================
 [[32mACKS[0m]:  	 23
-[[32mELAPSED TIME[0m]:  0.006860
-[[31mNACKS[0m]:  	 16
-[[31mALARMS[0m]:  	 0
+[[32mELAPSED TIME[0m]:  0.013254
+[[31mNACKS[0m]:  	 48
+[[31mALARMS[0m]:  	 5
 ===========================================
 ===========================================
 

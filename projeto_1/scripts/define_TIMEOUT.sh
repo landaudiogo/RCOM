@@ -8,4 +8,3 @@ else
 fi
 
 sed -Ei "s/(^#define\s+TIMEOUT_DEFAULT\s+)(\w+)/\1$timeout/1" ../headers/linklayer.h
-grep TIMEOUT_DEFAULT ../headers/linklayer.h | cat

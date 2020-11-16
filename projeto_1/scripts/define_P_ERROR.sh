@@ -14,4 +14,3 @@ fi
 
 p_error=$(awk "BEGIN {print ($p_error*1000)}")
 sed -Ei "s/(^#define\s+P_ERROR\s+)(\w+)/\1$p_error/1" ../headers/linklayer.h
-grep P_ERROR ../headers/linklayer.h | cat

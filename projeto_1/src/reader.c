@@ -56,7 +56,6 @@ llread(char *packet) {
             char *error = "undefined behaviour... ignoring"; 
             fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error);
             free(message); // in case a message 
-            return -1; 
         }
         free(message);
     }
