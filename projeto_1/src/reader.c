@@ -1,31 +1,4 @@
 #include "../headers/reader.h"
-<<<<<<< HEAD
-#include <string.h>
-
-int role = RECEIVER; 
-
-int 
-main(int argc, char **argv) {
-    if (argc<=1 || (strncmp(argv[1], "/dev/pts/", 9) != 0 && strncmp(argv[1], "/dev/tty", 8) != 0)) {
-        char *error = "Arguments expected to be of type:\n1) /dev/pts/N or /dev/ttyXX (where N represents a postive Integer)\n2) relative or absolute file_path to the file\n"; 
-        fprintf(stderr, RED "Module: %s\nFunction: %s()\nError -> %s\n\n" RESET, __FILE__, __func__, error); 
-        exit(1);
-    }
-
-    int fd; // file descriptor for the serial port
-    if ( (fd = open(argv[1], O_RDWR | O_NOCTTY)) == -1) {
-        perror(argv[1]); exit(1); }
-
-    // set a connection
-    if (llopen(fd, role) == -1) {
-        char *error = "Failed to establish connection"; 
-        fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
-        exit(1);
-    }
-    printf("LLOPEN: \t[" GREEN "OK" RESET "]\n\n\n");
-=======
-#include "../headers/linklayer.h"
->>>>>>> 2c90c30f53eee45ca93f705c7f9fadbe862de3f1
 
 #include <string.h>
 // definition of external variables
@@ -48,6 +21,7 @@ llread(char *packet) {
             if (BCC2_check(packet, packet_size, BCC) == TRUE) { // BCC2_check returned OK
                 expected_seq ^= (IC0^IC1);
                 // sending ACK
+                printf("===" GREEN "sending ACK" RESET "===\n");
                 unsigned char RR = (ctrl == IC0) ? RR1 : RR0;
                 unsigned char command1[] ={FLAG, A1, RR, A1^RR, FLAG};
                 write(fd, command1, 5);
@@ -57,11 +31,11 @@ llread(char *packet) {
             }
             else { // BCC2 check FAILED
                 // sending NACK
+                printf("===" RED "sending NACK" RESET "===\n");
                 unsigned char REJ = (ctrl == IC0) ? REJ0 : REJ1;
                 unsigned char command1[] ={FLAG, A1, REJ, A1^REJ, FLAG};
                 write(fd, command1, 5);
                 stats.nacks++;
-                return -1;
             }
         }
         else if (ctrl == (expected_seq^(IC0^IC1)) ) { // is a duplicate information frame
@@ -70,7 +44,7 @@ llread(char *packet) {
             unsigned char command1[] ={FLAG, A1, RR, A1^RR, FLAG};
             write(fd, command1, 5);
             stats.repeated_acks++;
-            printf("\n\n---repeated data--- %x\n", ctrl);
+            printf("===" RED "REPEATED DATA" RESET "===\n");
         }
         else if (ctrl == SET) { // in case tx is trying to re-establish communication
             char *error = "TRANSMITTER did not leave llopen. Sending UA"; 
@@ -84,6 +58,7 @@ llread(char *packet) {
             free(message); // in case a message 
             return -1; 
         }
+        free(message);
     }
 }
 

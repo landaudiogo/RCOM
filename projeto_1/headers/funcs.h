@@ -2,9 +2,10 @@
 #define FUNCS_H
 
 // colored messages
-#define RESET "\033[0m" 
-#define RED   "\033[31m"
-#define GREEN "\033[32m"
+#define RESET   "\033[0m" 
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m" 
 
 
 #include "state.h"
@@ -113,5 +114,8 @@ unsigned char
 //   size: size of 'array'
 void
 print_array(unsigned char *array, int size);
+
+int 
+random_error(int probability_error);
 
 #endif

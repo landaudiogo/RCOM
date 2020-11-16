@@ -7,11 +7,23 @@
 #include <stdio.h>
 #include <strings.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #include "../headers/funcs.h"
 #include "../headers/linklayer.h"
 
 int FLAG_ALARM;
+
+
+int 
+random_error(int error_probability) {
+    return (rand() % 100000 < (error_probability)) ? 1:0;
+}
+
+int
+byte_position() {
+    return rand() % 8;
+}
 
 unsigned char
 receiveFrame(int fd, unsigned char **message, int *message_size) {
@@ -26,12 +38,29 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
         if (read(fd, &c, 1) <= 0)  {
             continue;
         }
+        if (random_error(P_ERROR) == 1) { // in case we are to induce an error
+            int position = byte_position(); 
+            printf("--> position: %d\tstate: %d\n", position, state);
+            unsigned char error = 1 << (position);
+            // printing char before the error
+            // printf("c before: ");
+            // for (int k=0; k<8; k++) printf("%d", (c&(1<<(7-k))) ? 1:0 );
+            // printf(" %x", c);
+            // printf("\n");
+            c^=error;
+            // printing the char after applying the error
+            // printf("c after:  ");
+            // for (int k=0; k<8; k++) printf("%d", (c&(1<<(7-k))) ? 1:0 );
+            // printf(" %x", c);
+            // printf("\n");
+        }
         // printf("state: %d\tc: %x\n", state, c);
         switch (state) {
             // state: condition
             //   FLAG_RCV: FLAG 
             //   START: !FLAG
             case START: 
+                // printf(YELLOW "\n\nNEW FRAME\n, %x\n" RESET, c);
                 state = FLAG_RCV*(c == FLAG);
                 break;
                 

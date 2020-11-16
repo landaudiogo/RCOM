@@ -38,6 +38,7 @@ llopen(linkLayer connectionParameters) {
         char *error = "role belongs to {TRANSMITTER, RECEIVER}"; 
         fprintf(stderr, RED "Module: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); return -1; 
     }
+    srand(time(0));
     // store the information on the old settings to be reset at the end of transmission
     if ( (fd = open(connectionParameters.serialPort, O_RDWR | O_NOCTTY)) == -1) return -1;
     if (tcgetattr(fd, &oldtio) == -1) {
@@ -78,6 +79,8 @@ llopen(linkLayer connectionParameters) {
                 alarm(0);
                 free(dummy_message); dummy_message = NULL; 
                 linkRole = connectionParameters;
+                printf("======== STARTING ========\n");
+                stats.start = clock();
                 return 0;
             }
             free(dummy_message); dummy_message = NULL; 
@@ -85,7 +88,7 @@ llopen(linkLayer connectionParameters) {
         return -1;
     }
     else if (connectionParameters.role == RECEIVER) {
-        if (receiveFrame(fd, &dummy_message, &dummy_size) != SET) return -1; // receive SET
+        while (receiveFrame(fd, &dummy_message, &dummy_size) != SET);
         free(dummy_message); dummy_message = NULL; 
         unsigned char command[] = {FLAG, A0, UA, A0^UA, FLAG};
         if (write(fd, command, 5) == -1) return -1; // send UA
@@ -102,7 +105,9 @@ llclose(int showStatistics) {
     if (showStatistics) {
         fprintf(stdout, "\n\n===========================================\n===========================================\n");
         fprintf(stdout, "[" GREEN "ACKS" RESET "]:  \t %d\n", stats.acks);
-        // fprintf(stdout, "[" GREEN "ELAPSED TIME" RESET "]: %f\n", secs);
+        clock_t difference = clock() - stats.start;
+        double seconds = (double)difference/CLOCKS_PER_SEC;
+        fprintf(stdout, "[" GREEN "ELAPSED TIME" RESET "]:  %f\n", seconds);
         if (linkRole.role == RECEIVER)
             fprintf(stdout, "[" RED "REPEATED_ACKS" RESET "]: %d\n", stats.repeated_acks);
         fprintf(stdout, "[" RED "NACKS" RESET "]:  \t %d\n", stats.nacks);
