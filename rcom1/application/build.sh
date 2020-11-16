@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+RED='\033[0;31m'
+RESET='\033[0m'
+
+#define starting directory absolute
+cd "$RCOM_professor"
 
 # Compiling object files
 cd ../../projeto_1/scripts

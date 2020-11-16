@@ -21,7 +21,7 @@ llread(char *packet) {
             if (BCC2_check(packet, packet_size, BCC) == TRUE) { // BCC2_check returned OK
                 expected_seq ^= (IC0^IC1);
                 // sending ACK
-                printf("===" GREEN "sending ACK" RESET "===\n");
+                printf("===" GREEN "ACK" RESET "===\n");
                 unsigned char RR = (ctrl == IC0) ? RR1 : RR0;
                 unsigned char command1[] ={FLAG, A1, RR, A1^RR, FLAG};
                 write(fd, command1, 5);
@@ -31,7 +31,7 @@ llread(char *packet) {
             }
             else { // BCC2 check FAILED
                 // sending NACK
-                printf("===" RED "sending NACK" RESET "===\n");
+                printf("===" RED "NACK" RESET "===\n");
                 unsigned char REJ = (ctrl == IC0) ? REJ0 : REJ1;
                 unsigned char command1[] ={FLAG, A1, REJ, A1^REJ, FLAG};
                 write(fd, command1, 5);
@@ -44,7 +44,7 @@ llread(char *packet) {
             unsigned char command1[] ={FLAG, A1, RR, A1^RR, FLAG};
             write(fd, command1, 5);
             stats.repeated_acks++;
-            printf("===" RED "REPEATED DATA" RESET "===\n");
+            printf("===" RED "REPEATED DATA ACK" RESET "===\n");
         }
         else if (ctrl == SET) { // in case tx is trying to re-establish communication
             char *error = "TRANSMITTER did not leave llopen. Sending UA"; 

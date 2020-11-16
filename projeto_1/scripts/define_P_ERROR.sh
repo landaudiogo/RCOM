@@ -9,7 +9,7 @@ fi
 
 
 if [[ $(awk "BEGIN {print ($p_error>=0 && $p_error<50)}") == 0 ]]; then
-    echo "the first argument belongs to the interval [0, 50[ with 3 decimal point precision"; exit 1
+    echo "P_ERROR argument belongs to the interval [0, 50[ with 3 decimal point precision"; exit 1
 fi
 
 p_error=$(awk "BEGIN {print ($p_error*1000)}")

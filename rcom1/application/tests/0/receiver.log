@@ -1,0 +1,38 @@
+/dev/ttyS11 rx tests/images/received_penguin_0.gif
+rx mode
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 999
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 1998
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 2997
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 3996
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 4995
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 5994
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 6993
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 7992
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 8991
+===[32mACK[0m===
+read from file -> write to link layer, 1000 999 9990
+===[32mACK[0m===
+read from file -> write to link layer, 979 978 10968
+===[32mACK[0m===
+App layer: done receiving file
+
+
+===========================================
+===========================================
+[[32mACKS[0m]:  	 12
+[[32mELAPSED TIME[0m]:  0.014563
+[[31mREPEATED_ACKS[0m]: 0
+[[31mNACKS[0m]:  	 0
+[[31mALARMS[0m]:  	 0
+===========================================
+===========================================
+
