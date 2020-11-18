@@ -1,11 +1,12 @@
 /*Non-Canonical Input Processing*/
-
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #define BAUDRATE B38400
 #define _POSIX_SOURCE 1 /* POSIX compliant source */
 #define FALSE 0
@@ -15,13 +16,10 @@ volatile int STOP=FALSE;
 
 int main(int argc, char** argv)
 {
-
- 
     printf("\n");
 
     system("socat -d -d PTY,link=/dev/ttyS10,mode=777 PTY,link=/dev/emulatorTx,mode=777 &");
     sleep(1);
-    printf("\n");
 
     system("socat -d -d PTY,link=/dev/ttyS11,mode=777 PTY,link=/dev/emulatorRx,mode=777 &");
     sleep(1);
@@ -104,7 +102,7 @@ int connection=100;
 
       fromTx = read(fdTx,tx2rx,512); 
       if(fromTx){ 
-          if(connection){
+        if(connection){
 	     if (connection == 200) {
 	     	tx2rx[0] = tx2rx[0] ^ 0xFF;
 	     }
@@ -145,19 +143,22 @@ int connection=100;
               connection=0;
               printf("CONNECTION OFF\n");
               }
-          if (strcmp(rxStdin, "on")==0 || strcmp(rxStdin, "1")==0) {
+          else if (strcmp(rxStdin, "on")==0 || strcmp(rxStdin, "1")==0) {
               connection=100;
               printf("CONNECTION ON\n");
               }
-          if (strcmp(rxStdin, "noise")==0 || strcmp(rxStdin, "2")==0) {
+          else if (strcmp(rxStdin, "noise")==0 || strcmp(rxStdin, "2")==0) {
               connection=200;
               printf("CONNECTION NOISE\n");
               }
-          if (strcmp(rxStdin, "end")==0 ) {
+          else if (strcmp(rxStdin, "end")==0 ) {
               printf("END OF THE PROGRAM\n");
               STOP=TRUE;
               }
+          else {
+             printf("RECEIVED: %d\n", fromStdin);
           }
+        }
 
     }
 

@@ -1,0 +1,115 @@
+
+
+ 
+Transmitter must open /dev/ttyS10 
+Receiver must open /dev/ttyS11 
+ 
+The cable program is sensible to the following interative commands:
+--- on   : connects the cable and data is exchanged (default state)
+--- off  : disconnects the cable disabling data to be exchanged
+--- end  : terminates de program 
+ 
+cable
+CONNECTION ON
+fromTx=5 > toRx= 5 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=500 > toRx= 500 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=501 > toRx= 501 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=502 > toRx= 502 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=498 > toRx= 498 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=503 > toRx= 503 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=501 > toRx= 501 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=495 > toRx= 495 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=496 > toRx= 496 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=499 > toRx= 499 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=499 > toRx= 499 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=487 > toRx= 487 
+toTx= 5 < fromRx=5 
+fromTx=7 > toRx= 7 
+toTx= 5 < fromRx=5 
+fromTx=5 > toRx= 5 
+toTx= 5 < fromRx=5 
+fromTx=5 > toRx= 5 
+fromTx=5 > toRx= 5 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=511 > toRx= 511 
+toTx= 5 < fromRx=5 
+fromTx=511 > toRx= 511 
+toTx= 5 < fromRx=5 
+fromTx=511 > toRx= 511 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=508 > toRx= 508 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=510 > toRx= 510 
+toTx= 5 < fromRx=5 
+fromTx=506 > toRx= 506 
+toTx= 5 < fromRx=5 
+fromTx=509 > toRx= 509 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=512 > toRx= 512 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=506 > toRx= 506 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=507 > toRx= 507 
+toTx= 5 < fromRx=5 
+fromTx=509 > toRx= 509 
+toTx= 5 < fromRx=5 
+fromTx=509 > toRx= 509 
+toTx= 5 < fromRx=5 
+fromTx=509 > toRx= 509 
+toTx= 5 < fromRx=5 
+fromTx=508 > toRx= 508 
+toTx= 5 < fromRx=5 
+fromTx=508 > toRx= 508 
+toTx= 5 < fromRx=5 
+fromTx=509 > toRx= 509 
+toTx= 5 < fromRx=5 
+fro
