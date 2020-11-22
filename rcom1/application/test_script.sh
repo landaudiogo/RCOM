@@ -5,7 +5,7 @@
 [ -p "/tmp/cable_input" ] || 
     { 
         rm /tmp/cable_input
-        sudo -u landaudiogo mkfifo /tmp/cable_input
+        mkfifo /tmp/cable_input
     }
 
 

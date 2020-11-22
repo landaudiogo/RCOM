@@ -80,7 +80,7 @@ llopen(linkLayer connectionParameters) {
                 free(dummy_message); dummy_message = NULL; 
                 linkRole = connectionParameters;
                 printf("======== STARTING ========\n");
-                stats.start = clock();
+                gettimeofday(&stats.start, NULL);
                 return 0;
             }
             free(dummy_message); dummy_message = NULL; 
@@ -93,6 +93,8 @@ llopen(linkLayer connectionParameters) {
         unsigned char command[] = {FLAG, A0, UA, A0^UA, FLAG};
         if (write(fd, command, 5) == -1) return -1; // send UA
         linkRole = connectionParameters;
+        printf("======== STARTING ========\n");
+        gettimeofday(&stats.start, NULL);
         return 0;
     }
     return -1;
@@ -105,9 +107,9 @@ llclose(int showStatistics) {
     if (showStatistics) {
         fprintf(stdout, "\n\n===========================================\n===========================================\n");
         fprintf(stdout, "[" GREEN "ACKS" RESET "]:  \t %d\n", stats.acks);
-        clock_t difference = clock() - stats.start;
-        double seconds = (double)difference/CLOCKS_PER_SEC;
-        fprintf(stdout, "[" GREEN "ELAPSED TIME" RESET "]:  %f\n", seconds);
+        struct timeval end;
+        gettimeofday(&end, NULL);
+        fprintf(stdout, "[" GREEN "ELAPSED TIME" RESET "]:  %f\n", (double) (end.tv_sec-stats.start.tv_sec) + (double) (end.tv_usec-stats.start.tv_usec)/1000000);
         if (linkRole.role == RECEIVER)
             fprintf(stdout, "[" RED "REPEATED_ACKS" RESET "]: %d\n", stats.repeated_acks);
         fprintf(stdout, "[" RED "NACKS" RESET "]:  \t %d\n", stats.nacks);

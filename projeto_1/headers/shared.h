@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <strings.h>
 #include <time.h>
+#include <sys/time.h>
 
 // internal functions  
 // internal static definitions
@@ -32,7 +33,7 @@ typedef struct _Statistics {
     int acks;
     int repeated_acks;
     int alarms;
-    time_t start;
+    struct timeval start;
 } Statistics;
 
 extern Statistics stats;
