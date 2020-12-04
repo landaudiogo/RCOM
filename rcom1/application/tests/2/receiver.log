@@ -1,180 +1,358 @@
 /dev/ttyS11 rx tests/images/received_penguin_2.gif
 rx mode
 ======== STARTING ========
---> position: 0	state: 4
+--> position: 2	state: 4
 ===NACK===
---> position: 4	state: 4
---> position: 7	state: 4
---> position: 5	state: 4
+--> position: 3	state: 4
 ===NACK===
 --> position: 1	state: 4
+--> position: 4	state: 4
 ===NACK===
---> position: 5	state: 4
---> position: 5	state: 4
+--> position: 6	state: 4
+--> position: 1	state: 4
+===NACK===
+--> position: 7	state: 1
+--> position: 3	state: 0
+--> position: 2	state: 0
+--> position: 5	state: 0
+--> position: 0	state: 4
+--> position: 6	state: 4
+--> position: 7	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 499
+--> position: 3	state: 4
+--> position: 2	state: 4
+--> position: 0	state: 4
+===NACK===
+--> position: 1	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 1	state: 4
+===NACK===
+--> position: 3	state: 4
+--> position: 2	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 998
---> position: 6	state: 4
-===NACK===
---> position: 0	state: 4
---> position: 1	state: 4
---> position: 7	state: 4
-===NACK===
 --> position: 5	state: 4
-===NACK===
 --> position: 6	state: 4
---> position: 6	state: 4
---> position: 6	state: 4
-===NACK===
---> position: 1	state: 4
-===NACK===
---> position: 0	state: 4
---> position: 7	state: 4
-===NACK===
 --> position: 3	state: 4
---> position: 2	state: 4
---> position: 5	state: 4
---> position: 2	state: 4
 ===NACK===
+--> position: 0	state: 4
 --> position: 4	state: 4
---> position: 3	state: 4
---> position: 0	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 1497
---> position: 6	state: 4
-===NACK===
+--> position: 3	state: 4
+--> position: 3	state: 4
+--> position: 2	state: 4
+--> position: 2	state: 4
 ===ACK===
 read from file -> write to link layer, 500 499 1996
+--> position: 6	state: 4
+--> position: 1	state: 4
+===NACK===
+--> position: 2	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 0	state: 4
+--> position: 5	state: 4
+===NACK===
 --> position: 3	state: 4
+--> position: 3	state: 4
+--> position: 4	state: 4
+===NACK===
+--> position: 4	state: 4
+--> position: 7	state: 4
+===NACK===
+--> position: 4	state: 4
+===NACK===
+--> position: 2	state: 4
+===NACK===
+--> position: 7	state: 4
+--> position: 4	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 2495
---> position: 7	state: 4
-===NACK===
---> position: 3	state: 4
-===NACK===
---> position: 4	state: 4
-===NACK===
---> position: 3	state: 4
---> position: 0	state: 4
+--> position: 2	state: 4
 ===NACK===
 --> position: 6	state: 4
---> position: 3	state: 4
---> position: 5	state: 4
---> position: 4	state: 4
 ===NACK===
+--> position: 2	state: 4
+--> position: 7	state: 4
+===NACK===
+--> position: 7	state: 4
+--> position: 1	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
+--> position: 5	state: 4
+--> position: 6	state: 4
 --> position: 5	state: 4
 ===NACK===
 --> position: 2	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
+--> position: 6	state: 4
+--> position: 7	state: 4
+===NACK===
+--> position: 7	state: 4
+--> position: 1	state: 4
+===NACK===
 --> position: 4	state: 4
---> posit
+--> position: 0	state: 4
+--> position: 7	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 4	state: 1
+--> position: 0	state: 0
+--> position: 5	state: 0
+--> position: 5	state: 4
+===NACK===
+--> position: 3	state: 4
+--> position: 1	state: 4
+===NACK===
+--> position: 0	state: 4
+--> position: 0	state: 4
+--> position: 5	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 2	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 7	state: 4
+--> position: 2	state: 4
+===NACK===
+--> position: 2	state: 4
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 2994
+--> position: 3	state: 4
+===NACK===
+--> position: 1	state: 4
+--> position: 3	state: 4
+--> position: 5	state: 4
+--> position: 4	state: 4
+--> position: 7	state: 4
+--> position: 1	state: 4
+--> position: 4	state: 4
+--> position: 4	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 4	state: 4
+===NACK===
+--> position: 5	state: 4
+--> position: 1	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 3493
+--> position: 1	state: 4
+--> position: 0	state: 4
+--> position: 6	state: 4
+===NACK===
+--> position: 1	state: 4
+--> position: 4	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 3992
+--> position: 2	state: 4
+--> position: 2	state: 4
+===ACK===
+read from file -> write to link layer, 500 499 4491
+--> position: 2	state: 4
+--> position: 6	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 4	state: 4
+===NACK===
+--> position: 1	state: 4
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 4990
+--> position: 7	state: 4
+===NACK===
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 5489
+===ACK===
+read from file -> write to link layer, 500 499 5988
+--> position: 6	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 6487
+--> position: 6	state: 4
+===NACK===
+--> position: 3	state: 4
+--> position: 7	state: 4
+===NACK===
+--> position: 0	state: 4
+--> position: 5	state: 4
+===NACK===
+--> position: 3	state: 4
+===NACK===
+--> position: 7	state: 4
+--> position: 5	state: 4
+--> position: 7	state: 4
+===NACK===
+--> position: 0	state: 4
+--> position: 1	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 2	state: 4
+--> position: 5	state: 4
+--> position: 6	state: 4
+===NACK===
+--> position: 1	state: 4
+===NACK===
+--> position: 3	state: 4
+--> position: 6	state: 4
+--> position: 6	state: 4
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 6986
+--> position: 0	state: 4
+--> position: 5	state: 4
+===NACK===
+--> position: 6	state: 4
+--> position: 0	state: 4
+--> position: 2	state: 4
+===NACK===
+--> position: 4	state: 1
+--> pos
 
 Module: src/funcs.c
 Function: de_stuff()
 Error: Received a frame with more bytes than the allowed payload
 
-ion: 3	state: 4
-===NACK===
---> position: 1	state: 4
---> position: 2	state: 4
---> position: 2	state: 4
-===NACK===
---> position: 3	state: 4
---> position: 1	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 2994
+ition: 0	state: 0
+--> position: 5	state: 0
 --> position: 6	state: 4
 ===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 3493
---> position: 6	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 3992
---> position: 0	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 4491
---> position: 1	state: 4
---> position: 1	state: 4
---> position: 6	state: 4
-===NACK===
---> position: 7	state: 4
---> position: 5	state: 4
-===NACK===
---> position: 6	state: 4
-===NACK===
---> position: 4	state: 4
-===NACK===
---> position: 5	state: 4
---> position: 5	state: 4
---> position: 6	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 4990
---> position: 3	state: 4
---> position: 5	state: 4
-===NACK===
+--> position: 3	state: 2
+--> position: 6	state: 0
+--> position: 7	state: 0
 --> position: 2	state: 4
 ===NACK===
---> position: 2	state: 4
---> position: 1	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 5489
---> position: 7	state: 4
---> position: 0	state: 4
-===NACK===
---> position: 1	state: 4
+--> position: 6	state: 4
 --> position: 5	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 5988
---> position: 0	state: 4
---> position: 0	state: 4
-===ACK===
-read from file -> write to link layer, 500 499 6487
---> position: 7	state: 4
---> position: 1	state: 4
---> position: 5	state: 4
---> position: 4	state: 4
-===NACK===
-===ACK===
-read from file -> write to link layer, 500 499 6986
---> position: 0	state: 4
---> position: 7	state: 4
-===NACK===
+--> position: 1	state: 0
+--> position: 4	state: 0
 ===ACK===
 read from file -> write to link layer, 500 499 7485
+--> position: 3	state: 4
+--> position: 0	state: 4
+--> position: 4	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 5	state: 4
+--> position: 1	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 7984
-===ACK===
-read from file -> write to link layer, 500 499 8483
 --> position: 7	state: 4
 --> position: 0	state: 4
+--> position: 4	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 8483
+--> position: 0	state: 4
+--> position: 2	state: 4
+--> position: 6	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 4	state: 4
+--> position: 2	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 4	state: 4
+===NACK===
+--> position: 0	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 2	state: 4
+--> position: 2	state: 4
+--> position: 6	state: 4
+===NACK===
+--> position: 1	state: 4
+===NACK===
+--> position: 5	state: 4
+===NACK===
+--> position: 4	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 8982
+--> position: 2	state: 4
+--> position: 3	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 9481
+--> position: 7	state: 4
+--> position: 2	state: 4
+--> position: 5	state: 4
+===NACK===
 --> position: 6	state: 4
+--> position: 4	state: 4
+--> position: 5	state: 4
+===NACK===
+--> position: 4	state: 4
+--> position: 1	state: 4
+--> position: 2	state: 4
+--> position: 1	state: 4
+--> position: 2	state: 4
+===NACK===
+--> position: 3	state: 4
+===NACK===
+--> position: 4	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 2	state: 4
+--> position: 7	state: 4
+--> position: 4	state: 4
+===NACK===
+--> position: 2	state: 4
+--> position: 1	state: 4
+===NACK===
+--> position: 1	state: 4
+===NACK===
+--> position: 4	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 9980
---> position: 4	state: 4
---> position: 7	state: 4
+--> position: 3	state: 4
+--> position: 6	state: 4
+--> position: 5	state: 4
+--> position: 1	state: 4
+===NACK===
+--> position: 5	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 10479
+--> position: 3	state: 4
 --> position: 5	state: 4
---> position: 7	state: 4
 ===NACK===
---> position: 0	state: 4
 --> position: 4	state: 4
---> position: 5	state: 4
+--> position: 6	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 490 489 10968
@@ -185,9 +363,9 @@ App layer: done receiving file
 ===========================================
 ===========================================
 [ACKS]:  	 23
-[ELAPSED TIME]:  4.406859
+[ELAPSED TIME]:  29.302320
 [REPEATED_ACKS]: 0
-[NACKS]:  	 42
+[NACKS]:  	 97
 [ALARMS]:  	 0
 ===========================================
 ===========================================

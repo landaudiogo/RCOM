@@ -2,6 +2,7 @@
 tx mode
 ======== STARTING ========
 connection opened
+== ALARM ==
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
@@ -10,6 +11,7 @@ read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
+--> position: 6	state: 4
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
 read from file -> write to link layer, 499
@@ -30,9 +32,9 @@ App layer: done reading and sending file
 ===========================================
 ===========================================
 [ACKS]:  	 23
-[ELAPSED TIME]:  0.255400
-[NACKS]:  	 11
-[ALARMS]:  	 0
+[ELAPSED TIME]:  1.253260
+[NACKS]:  	 15
+[ALARMS]:  	 1
 ===========================================
 ===========================================
 

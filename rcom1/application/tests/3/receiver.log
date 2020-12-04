@@ -1,0 +1,569 @@
+/dev/ttyS11 rx tests/images/received_penguin_3.gif
+rx mode
+======== STARTING ========
+===ACK===
+read from file -> write to link layer, 50 49 49
+===ACK===
+read from file -> write to link layer, 50 49 98
+===ACK===
+read from file -> write to link layer, 50 49 147
+===ACK===
+read from file -> write to link layer, 50 49 196
+===ACK===
+read from file -> write to link layer, 50 49 245
+===ACK===
+read from file -> write to link layer, 50 49 294
+===ACK===
+read from file -> write to link layer, 50 49 343
+===ACK===
+read from file -> write to link layer, 50 49 392
+===ACK===
+read from file -> write to link layer, 50 49 441
+===ACK===
+read from file -> write to link layer, 50 49 490
+===ACK===
+read from file -> write to link layer, 50 49 539
+===ACK===
+read from file -> write to link layer, 50 49 588
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 637
+===ACK===
+read from file -> write to link layer, 50 49 686
+===ACK===
+read from file -> write to link layer, 50 49 735
+===ACK===
+read from file -> write to link layer, 50 49 784
+===ACK===
+read from file -> write to link layer, 50 49 833
+===ACK===
+read from file -> write to link layer, 50 49 882
+===ACK===
+read from file -> write to link layer, 50 49 931
+===ACK===
+read from file -> write to link layer, 50 49 980
+===ACK===
+read from file -> write to link layer, 50 49 1029
+===ACK===
+read from file -> write to link layer, 50 49 1078
+===ACK===
+read from file -> write to link layer, 50 49 1127
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 1176
+===ACK===
+read from file -> write to link layer, 50 49 1225
+===ACK===
+read from file -> write to link layer, 50 49 1274
+===ACK===
+read from file -> write to link layer, 50 49 1323
+===ACK===
+read from file -> write to link layer, 50 49 1372
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 1421
+===ACK===
+read from file -> write to link layer, 50 49 1470
+===ACK===
+read from file -> write to link layer, 50 49 1519
+===ACK===
+read from file -> write to link layer, 50 49 1568
+===ACK===
+read from file -> write to link layer, 50 49 1617
+===ACK===
+read from file -> write to link layer, 50 49 1666
+===ACK===
+read from file -> write to link layer, 50 49 1715
+===ACK===
+read from file -> write to link layer, 50 49 1764
+===ACK===
+read from file -> write to link layer, 50 49 1813
+===ACK===
+read from file -> write to link layer, 50 49 1862
+===ACK===
+read from file -> write to link layer, 50 49 1911
+===ACK===
+read from file -> write to link layer, 50 49 1960
+===ACK===
+read from file -> write to link layer, 50 49 2009
+===ACK===
+read from file -> write to link layer, 50 49 2058
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 2107
+===ACK===
+read from file -> write to link layer, 50 49 2156
+===ACK===
+read from file -> write to link layer, 50 49 2205
+===ACK===
+read from file -> write to link layer, 50 49 2254
+===ACK===
+read from file -> write to link layer, 50 49 2303
+===ACK===
+read from file -> write to link layer, 50 49 2352
+--> position: 3	state: 4
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 2401
+===ACK===
+read from file -> write to link layer, 50 49 2450
+===ACK===
+read from file -> write to link layer, 50 49 2499
+===ACK===
+read from file -> write to link layer, 50 49 2548
+--> position: 6	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 2597
+===ACK===
+read from file -> write to link layer, 50 49 2646
+===ACK===
+read from file -> write to link layer, 50 49 2695
+===ACK===
+read from file -> write to link layer, 50 49 2744
+===ACK===
+read from file -> write to link layer, 50 49 2793
+===ACK===
+read from file -> write to link layer, 50 49 2842
+===ACK===
+read from file -> write to link layer, 50 49 2891
+===ACK===
+read from file -> write to link layer, 50 49 2940
+--> position: 5	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 2989
+===ACK===
+read from file -> write to link layer, 50 49 3038
+===ACK===
+read from file -> write to link layer, 50 49 3087
+===ACK===
+read from file -> write to link layer, 50 49 3136
+===ACK===
+read from file -> write to link layer, 50 49 3185
+===ACK===
+read from file -> write to link layer, 50 49 3234
+===ACK===
+read from file -> write to link layer, 50 49 3283
+===ACK===
+read from file -> write to link layer, 50 49 3332
+===ACK===
+read from file -> write to link layer, 50 49 3381
+===ACK===
+read from file -> write to link layer, 50 49 3430
+===ACK===
+read from file -> write to link layer, 50 49 3479
+--> position: 1	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 3528
+===ACK===
+read from file -> write to link layer, 50 49 3577
+===ACK===
+read from file -> write to link layer, 50 49 3626
+===ACK===
+read from file -> write to link layer, 50 49 3675
+===ACK===
+read from file -> write to link layer, 50 49 3724
+===ACK===
+read from file -> write to link layer, 50 49 3773
+===ACK===
+read from file -> write to link layer, 50 49 3822
+===ACK===
+read from file -> write to link layer, 50 49 3871
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 3920
+===ACK===
+read from file -> write to link layer, 50 49 3969
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 4018
+===ACK===
+read from file -> write to link layer, 50 49 4067
+===ACK===
+read from file -> write to link layer, 50 49 4116
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 4165
+--> position: 6	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 4214
+===ACK===
+read from file -> write to link layer, 50 49 4263
+===ACK===
+read from file -> write to link layer, 50 49 4312
+===ACK===
+read from file -> write to link layer, 50 49 4361
+===ACK===
+read from file -> write to link layer, 50 49 4410
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 4459
+===ACK===
+read from file -> write to link layer, 50 49 4508
+===ACK===
+read from file -> write to link layer, 50 49 4557
+===ACK===
+read from file -> write to link layer, 50 49 4606
+===ACK===
+read from file -> write to link layer, 50 49 4655
+===ACK===
+read from file -> write to link layer, 50 49 4704
+===ACK===
+read from file -> write to link layer, 50 49 4753
+===ACK===
+read from file -> write to link layer, 50 49 4802
+===ACK===
+read from file -> write to link layer, 50 49 4851
+===ACK===
+read from file -> write to link layer, 50 49 4900
+===ACK===
+read from file -> write to link layer, 50 49 4949
+===ACK===
+read from file -> write to link layer, 50 49 4998
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 5047
+===ACK===
+read from file -> write to link layer, 50 49 5096
+--> position: 7	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 5145
+===ACK===
+read from file -> write to link layer, 50 49 5194
+===ACK===
+read from file -> write to link layer, 50 49 5243
+--> position: 4	state: 0
+===ACK===
+read from file -> write to link layer, 50 49 5292
+===ACK===
+read from file -> write to link layer, 50 49 5341
+===ACK===
+read from file -> write to link layer, 50 49 5390
+===ACK===
+read from file -> write to link layer, 50 49 5439
+===ACK===
+read from file -> write to link layer, 50 49 5488
+--> position: 7	state: 4
+===NACK===
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 5537
+--> position: 3	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 5586
+===ACK===
+read from file -> write to link layer, 50 49 5635
+--> position: 5	state: 2
+--> position: 1	state: 0
+===ACK===
+read from file -> write to link layer, 50 49 5684
+===ACK===
+read from file -> write to link layer, 50 49 5733
+--> position: 5	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 5782
+===REPEATED DATA ACK===
+===ACK===
+read from file -> write to link layer, 50 49 5831
+===ACK===
+read from file -> write to link layer, 50 49 5880
+===ACK===
+read from file -> write to link layer, 50 49 5929
+===ACK===
+read from file -> write to link layer, 50 49 5978
+===ACK===
+read from file -> write to link layer, 50 49 6027
+===ACK===
+read from file -> write to link layer, 50 49 6076
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 6125
+===ACK===
+read from file -> write to link layer, 50 49 6174
+===ACK===
+read from file -> write to link layer, 50 49 6223
+===ACK===
+read from file -> write to link layer, 50 49 6272
+===ACK===
+read from file -> write to link layer, 50 49 6321
+===ACK===
+read from file -> write to link layer, 50 49 6370
+--> position: 3	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 6419
+===ACK===
+read from file -> write to link layer, 50 49 6468
+--> position: 5	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 6517
+===ACK===
+read from file -> write to link layer, 50 49 6566
+===ACK===
+read from file -> write to link layer, 50 49 6615
+===ACK===
+read from file -> write to link layer, 50 49 6664
+===ACK===
+read from file -> write to link layer, 50 49 6713
+===ACK===
+read from file -> write to link layer, 50 49 6762
+===ACK===
+read from file -> write to link layer, 50 49 6811
+--> position: 4	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 6860
+===ACK===
+read from file -> write to link layer, 50 49 6909
+===ACK===
+read from file -> write to link layer, 50 49 6958
+===ACK===
+read from file -> write to link layer, 50 49 7007
+===ACK===
+read from file -> write to link layer, 50 49 7056
+--> position: 0	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 7105
+===ACK===
+read from file -> write to link layer, 50 49 7154
+===ACK===
+read from file -> write to link layer, 50 49 7203
+===ACK===
+read from file -> write to link layer, 50 49 7252
+===ACK===
+read from file -> write to link layer, 50 49 7301
+--> position: 4	state: 4
+===NACK===
+--> position: 4	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 7350
+===ACK===
+read from file -> write to link layer, 50 49 7399
+===ACK===
+read from file -> write to link layer, 50 49 7448
+--> position: 5	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 7497
+===ACK===
+read from file -> write to link layer, 50 49 7546
+===ACK===
+read from file -> write to link layer, 50 49 7595
+===ACK===
+read from file -> write to link layer, 50 49 7644
+--> position: 1	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 7693
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 7742
+===ACK===
+read from file -> write to link layer, 50 49 7791
+===ACK===
+read from file -> write to link layer, 50 49 7840
+===ACK===
+read from file -> write to link layer, 50 49 7889
+===ACK===
+read from file -> write to link layer, 50 49 7938
+===ACK===
+read from file -> write to link layer, 50 49 7987
+===ACK===
+read from file -> write to link layer, 50 49 8036
+===ACK===
+read from file -> write to link layer, 50 49 8085
+===ACK===
+read from file -> write to link layer, 50 49 8134
+--> position: 2	state: 4
+===NACK===
+--> position: 3	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 8183
+===ACK===
+read from file -> write to link layer, 50 49 8232
+===ACK===
+read from file -> write to link layer, 50 49 8281
+===ACK===
+read from file -> write to link layer, 50 49 8330
+===ACK===
+read from file -> write to link layer, 50 49 8379
+===ACK===
+read from file -> write to link layer, 50 49 8428
+===ACK===
+read from file -> write to link layer, 50 49 8477
+--> position: 6	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 8526
+===ACK===
+read from file -> write to link layer, 50 49 8575
+===ACK===
+read from file -> write to link layer, 50 49 8624
+===ACK===
+read from file -> write to link layer, 50 49 8673
+--> position: 6	state: 4
+--> position: 1	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 8722
+===ACK===
+read from file -> write to link layer, 50 49 8771
+===ACK===
+read from file -> write to link layer, 50 49 8820
+===ACK===
+read from file -> write to link layer, 50 49 8869
+===ACK===
+read from file -> write to link layer, 50 49 8918
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 8967
+===ACK===
+read from file -> write to link layer, 50 49 9016
+===ACK===
+read from file -> write to link layer, 50 49 9065
+===ACK===
+read from file -> write to link layer, 50 49 9114
+===ACK===
+read from file -> write to link layer, 50 49 9163
+===ACK===
+read from file -> write to link layer, 50 49 9212
+===ACK===
+read from file -> write to link layer, 50 49 9261
+===ACK===
+read from file -> write to link layer, 50 49 9310
+===ACK===
+read from file -> write to link layer, 50 49 9359
+===ACK===
+read from file -> write to link layer, 50 49 9408
+===ACK===
+read from file -> write to link layer, 50 49 9457
+===ACK===
+read from file -> write to link layer, 50 49 9506
+===ACK===
+read from file -> write to link layer, 50 49 9555
+--> position: 6	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 9604
+===ACK===
+read from file -> write to link layer, 50 49 9653
+--> position: 3	state: 4
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 9702
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 9751
+===ACK===
+read from file -> write to link layer, 50 49 9800
+===ACK===
+read from file -> write to link layer, 50 49 9849
+===ACK===
+read from file -> write to link layer, 50 49 9898
+===ACK===
+read from file -> write to link layer, 50 49 9947
+===ACK===
+read from file -> write to link layer, 50 4
+
+Module: src/funcs.c
+Function: de_stuff()
+Error: Received a frame with more bytes than the allowed payload
+
+9 9996
+--> position: 5	state: 4
+===NACK===
+--> position: 2	state: 4
+===ACK===
+read from file -> write to link layer, 50 49 10045
+--> position: 2	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 10094
+===ACK===
+read from file -> write to link layer, 50 49 10143
+===ACK===
+read from file -> write to link layer, 50 49 10192
+--> position: 4	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 10241
+===ACK===
+read from file -> write to link layer, 50 49 10290
+===ACK===
+read from file -> write to link layer, 50 49 10339
+===ACK===
+read from file -> write to link layer, 50 49 10388
+===ACK===
+read from file -> write to link layer, 50 49 10437
+===ACK===
+read from file -> write to link layer, 50 49 10486
+===ACK===
+read from file -> write to link layer, 50 49 10535
+===ACK===
+read from file -> write to link layer, 50 49 10584
+--> position: 7	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 10633
+===ACK===
+read from file -> write to link layer, 50 49 10682
+===ACK===
+read from file -> write to link layer, 50 49 10731
+--> position: 6	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 50 49 10780
+===ACK===
+read from file -> write to link layer, 50 49 10829
+===ACK===
+read from file -> write to link layer, 50 49 10878
+===ACK===
+read from file -> write to link layer, 50 49 10927
+--> position: 1	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 42 41 10968
+===ACK===
+App layer: done receiving file
+
+
+===========================================
+===========================================
+[ACKS]:  	 225
+[ELAPSED TIME]:  16.710351
+[REPEATED_ACKS]: 1
+[NACKS]:  	 45
+[ALARMS]:  	 0
+===========================================
+===========================================
+

@@ -1,38 +1,44 @@
 /dev/ttyS11 rx tests/images/received_penguin_1.gif
 rx mode
 ======== STARTING ========
+--> position: 6	state: 4
+--> position: 4	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 7	state: 4
+===NACK===
+--> position: 2	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 499
 ===ACK===
 read from file -> write to link layer, 500 499 998
---> position: 1	state: 4
-===NACK===
 --> position: 3	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 1497
-===ACK===
-read from file -> write to link layer, 500 499 1996
---> position: 2	state: 4
---> position: 0	state: 4
-===NACK===
---> position: 2	state: 4
+--> position: 6	state: 4
 ===NACK===
 --> position: 4	state: 4
---> position: 5	state: 4
 ===NACK===
+--> position: 3	state: 4
+===NACK===
+===ACK===
+read from file -> write to link layer, 500 499 1996
 ===ACK===
 read from file -> write to link layer, 500 499 2495
---> position: 5	state: 4
-===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 2994
+--> position: 6	state: 4
+--> position: 4	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 3493
 ===ACK===
 read from file -> write to link layer, 500 499 3992
+--> position: 5	state: 4
+===NACK===
 --> position: 3	state: 4
---> position: 4	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 4491
@@ -40,19 +46,19 @@ read from file -> write to link layer, 500 499 4491
 read from file -> write to link layer, 500 499 4990
 ===ACK===
 read from file -> write to link layer, 500 499 5489
+--> position: 3	state: 4
+--> position: 3	state: 4
 ===ACK===
 read from file -> write to link layer, 500 499 5988
---> position: 2	state: 4
---> position: 0	state: 4
-===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 6487
 ===ACK===
 read from file -> write to link layer, 500 499 6986
 ===ACK===
 read from file -> write to link layer, 500 499 7485
---> position: 7	state: 4
---> position: 0	state: 4
+--> position: 3	state: 4
+===NACK===
+--> position: 6	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 7984
@@ -60,16 +66,16 @@ read from file -> write to link layer, 500 499 7984
 read from file -> write to link layer, 500 499 8483
 ===ACK===
 read from file -> write to link layer, 500 499 8982
---> position: 7	state: 4
 --> position: 3	state: 4
 ===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 9481
+--> position: 0	state: 4
+===NACK===
+--> position: 0	state: 4
+===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 9980
---> position: 4	state: 4
---> position: 3	state: 4
-===NACK===
 ===ACK===
 read from file -> write to link layer, 500 499 10479
 ===ACK===
@@ -81,9 +87,9 @@ App layer: done receiving file
 ===========================================
 ===========================================
 [ACKS]:  	 23
-[ELAPSED TIME]:  0.255012
+[ELAPSED TIME]:  1.252854
 [REPEATED_ACKS]: 0
-[NACKS]:  	 11
+[NACKS]:  	 15
 [ALARMS]:  	 0
 ===========================================
 ===========================================

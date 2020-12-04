@@ -26,7 +26,7 @@ cat <<< "on" > /tmp/cable_input
 
 # start the cable program
 printf "${GREEN}STARTING DEFAULT TEST${RESET}\n"
-read 
+read
 
 # DEFAULT test
 (( test = 0 ))
@@ -40,7 +40,6 @@ mkdir -p tests/${test}
 
 # user defined parameters
 printf "${GREEN}STARTING USER DEFINED PARAMETERS TEST${RESET}\n"
-read
 (( test++ ))
 mkdir -p tests/${test}
 ./build.sh -payload500 -timeout1 -p_error0.1 -retries4 -baud57600 ||
@@ -52,7 +51,6 @@ mkdir -p tests/${test}
 
 # high ERROR transmission with big PAYLOAD
 printf "${GREEN}STARTING INCREASED ERROR WITH SAME PAYLOAD TEST${RESET}\n"
-read
 (( test++ ))
 mkdir -p tests/${test}
 ./build.sh -timeout4 -p_error0.3 -retries3 || 
@@ -64,7 +62,6 @@ mkdir -p tests/${test}
 
 # high ERROR transmission with small payload
 printf "${GREEN}STARTING SAME ERROR REDUCED PAYLOAD${RESET}\n"
-read
 (( test++ ))
 mkdir -p tests/${test}
 ./build.sh -payload50  || 

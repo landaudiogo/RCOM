@@ -107,6 +107,9 @@ receiveFrame(int fd, unsigned char **message, int *message_size) {
                     if (idx >= (MAX_PAYLOAD_SIZE*2+3)) {
                         char *error = "Receiving more frames than allowed"; 
                         fprintf(stderr, RED "\nModule: %s\nFunction: %s()\nError: %s\n\n" RESET, __FILE__, __func__, error); 
+                        free(aux); aux = NULL;
+                        *message = aux; 
+                        *message_size = idx;
                         return 0x0; 
                     }
                     aux[idx++] = c;
