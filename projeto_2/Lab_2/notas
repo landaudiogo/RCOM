@@ -1,0 +1,21 @@
+
+Assuming you have the previous lab completed you can follow the next steps:
+1. Configure tux52 IP address
+    >ifconfig eth0 172.16.51.1/24
+2. Using the computer connected to the switch console port (Gkterm), create the VLANs in the switch console:
+    >enable                 # password 8nortel
+    >conf t
+    >vlan 50                # creates specified vlan
+    >vlan 51                # creates specified vlan
+    >end
+    >show vlan              # confirm the vlans have been created
+3. Change port's vlan
+    >int Fa0/<port-number>          # entering configuration mode for this interface
+    >switchport access vlan 5y      # changing the interface vlan into the on specified
+4. on tux53 ping tux54 and tux52 (capture the packets)
+    >ping 172.16.50.254             # capture packets
+    >ping 172.16.51.1               # should return network unreachable
+5. Start a capture in all 3 computers and in tux53 run:
+    >ping -b 172.15.50.255
+6. Start a capture in all 3 computers and in tux52 run:
+    >ping -b 172.15.51.255
