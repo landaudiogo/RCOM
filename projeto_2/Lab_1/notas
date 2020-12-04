@@ -1,0 +1,27 @@
+
+
+tux54 -> 172.16.50.254/24
+tux53 -> 172.16.50.1/24
+
+1. Connect the serial port of tux54 to the switch console
+2. in gkterm: >show vlan
+    - check whether all ports are connected to the same vlan (in this lab should be vlan 1 (default))
+    - in case their not, resetting the switch might be necessary
+        >enable                                     # password "8nortel"
+        >no vlan 2-4094                             # remove vlans between 2-4094 (virtual local networks)
+        >exit                                       # exit the environment you entered with enable
+        >copy flash:tux5clean startup-config        
+        >reload                                     # reset the switch
+3. Connect tux53 and tux54 to any ports in the switch
+4. in tux53 terminal:
+    >ifconfig eth0 172.16.50.1/24                # configure the local PC (tux53) to the specified IP address
+5. in tux54 terminal:
+    >ifconfig eth0 172.16.50.254/24              # configure the local PC (tux54) to the specified IP address
+6. Send the ping to the other computer's address. The next steps are assuming that you are on tux53
+    >ping 172.16.50.254                          # The pinged computer should be reachable
+7. Still on computer tux53, run the following commands:
+    >arp -n                        # will show that IP 172.16.50.254 corresponds to a $mac_address (48 bits/6 bytes)
+    >arp -d 172.16.50.254          # will remove the entry related to 172.16.50.254
+    # START A WIRESHARK CAPTURE
+    >ping 172.16.50.254
+8. Podemos responder às perguntas agora. (utilizar o wireshark capture para ajudar a perceber os pacotes ARP, ICMP)
