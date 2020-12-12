@@ -1,0 +1,24 @@
+1. Connect the router to VLAN1
+
+VLAN0
+    ports: 1, 5.
+    - tux3: 172.16.40.1   (eth0 -> porta 1 do switch)
+    - tux4: 172.16.40.254 (eth0 -> porta 5 do switch)
+VLAN1
+    ports: 2, 9, 13.
+    - tux2: 172.16.41.1   (eth0 -> porta 2 switch)
+    - tux4: 172.16.41.253 (eth1 -> porta 9)
+    - Rc:   172.16.41.254 (     -> porta 13)
+
+2. definir Rc com as configurações necessárias
+https://www.cisco.com/c/en/us/td/docs/routers/access/800M/software/800MSCG/routconf.html
+2.1. definir o IP do router em cada interface (inside e outside)
+2.2. definir o pool de IPs externos (NAT) pelos quais os IPs locais são substituidos
+2.3. expecificar a lista que pode aceder à pool previamente definida
+2.4. definir as rotas para as redes do router
+    - default route 172.16.1.254
+    - route para a rede 172.16.40.0/24 através do router 172.16.41.253 (tux4)
+
+3. Definir o default gw no tux4 para o Rc
+
+4. Definir o default gw no tux2 para o Rc

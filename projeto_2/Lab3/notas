@@ -1,0 +1,27 @@
+Ligar o computador como router às duas VLANS
+1. Adicionar ligação física do tux4 ao swtich atraves do eth1
+2. acrescentar tux4 às duas VLAN's com IP's diferentes
+
+
+VLAN0
+    ports: 1, 5.
+    - tux4: 172.16.40.254 (eth0 -> porta 5 do switch)
+    - tux3: 172.16.40.1   (eth0 -> porta 1 do switch)
+VLAN1
+    ports: 2, 9.
+    - tux4: 172.16.41.253 (eth1 -> porta 9)
+    - tux2: 172.16.41.1   (eth0 -> porta 2 switch)
+
+tux4:
+>ifconfig eth0 172.16.40.254/24     # configuração para a vlan0
+>ifconfig eth1 172.16.41.253/24     # configuração para a vlan1
+>echo 1 > /proc/sys/net/ipv4/ip_forward
+>echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+tux2:
+>route add default gw 172.16.41.253
+
+tux3:
+>route add default gw 172.16.40.254
+
+TERMINATED

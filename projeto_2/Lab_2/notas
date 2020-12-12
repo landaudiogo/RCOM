@@ -11,7 +11,7 @@ Assuming you have the previous lab completed you can follow the next steps:
     >show vlan              # confirm the vlans have been created
 3. Change port's vlan
     >int Fa0/<port-number>          # entering configuration mode for this interface
-    >switchport access vlan 5y      # changing the interface vlan into the on specified
+    >switchport access vlan 5y      # changing the interface vlan into the one specified
 4. on tux53 ping tux54 and tux52 (capture the packets)
     >ping 172.16.50.254             # capture packets
     >ping 172.16.51.1               # should return network unreachable
