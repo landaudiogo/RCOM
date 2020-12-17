@@ -6,7 +6,7 @@
 # This is for the internal network
 enable
 conf t
-interface gigabit ethernet 0/0                          # interface gigabit slot/port
+interface gigabitethernet 0/0                          # interface gigabit slot/port
 ip address 172.16.41.254 255.255.255.0                  # this is setting the router's ip address in the aformentioned interface
 no shutdown
 ip nat inside 
@@ -19,8 +19,8 @@ no shutdown
 ip nat outside
 exit
 
-ip nat pool ovrld 172.16.1.49 172.16.1.49 prefix 24     # creating a pool of outward adresses for the router (172.16.1.{19..19})
-ip nat inside source list 4 pool ovrld overload         # packets coming from IP's in the access-list 1, their IP's are changed to one of the IP's in the "ovrld" pool
+ip nat pool labfour 172.16.1.49 172.16.1.49 prefix 24   # creating a pool of outward adresses for the router (172.16.1.{19..19})
+ip nat inside source list 4 pool labfour overload       # packets coming from IP's in the access-list 1, their IP's are changed to one of the IP's in the "ovrld" pool
                                                         #   overload just means that a single outward IP address can be used by one or more source IP adresses 
 
 access-list 4 permit 172.16.41.0 0.0.0.7                # the first 7 addresses from 172.16.41.{1..7}
