@@ -3,11 +3,11 @@
 VLAN0
     ports: 1, 5.
     - tux3: 172.16.40.1   (eth0 -> porta 1 do switch) 00:21:5a:61:2f:d4
-    - tux4: 172.16.40.254 (eth0 -> porta 5 do switch) 00:c0:df:25:1a:f4
+    - tux4: 172.16.40.254 (eth0 -> porta 5 do switch) 00:21:5a:5a:7b:ea
 VLAN1
     ports: 2, 9, 13.
     - tux2: 172.16.41.1   (eth0 -> porta 2 switch) 00:1f:29:d7:45:c4
-    - tux4: 172.16.41.253 (eth1 -> porta 9)
+    - tux4: 172.16.41.253 (eth1 -> porta 9) 00:c0:df:25:1a:f4
     - Rc:   172.16.41.254 (eht0 -> porta 13) 68:ef:bd:e3:df:10
 
 2. definir Rc com as configurações necessárias

@@ -1,0 +1,6 @@
+1. Configurar os 3 PCs com o servidor DNS
+
+- open /etc/resolv.conf with nano or vi:
+
+- in the file add the following line above all others
+nameserver 172.16.1.2
